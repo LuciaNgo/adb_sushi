@@ -1,9 +1,13 @@
+body {
+    font-family: "Poppins", serif;
+}
+
 #home-header {
     width: 80%;
     height: 75px;
     display: flex;
     justify-content: space-between;
-    margin: 45px auto;
+    margin: 10px auto 10px;
     align-items: center;
 }
 
@@ -31,9 +35,38 @@
 .home-contentGroup {
     height: 1080px;
     align-items: center;
-    justify-content: space-between;
+    justify-items: center;
+}
+
+.home-contentGroup1 {
+    height: 990px;
+    align-items: center;
+    justify-items: center;
 }
 
 .home-contentGroupGray {
     background-color: rgb(73, 73, 73, 0.05);
 }
+
+.home-contentImage {
+    width: fit-content;
+}
+
+.home-contentGroup__text1 {
+    font-family: 'David Libre', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.home-contentTitle {
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.home-contentDescription {
+    width: 80%;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 30px;
+}
+

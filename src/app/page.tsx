@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Sidebar } from '@/ui/sidebar'; 
+import { Sidebar } from '@/ui/sidebar';
 import "@/styles/home.css"
 
 const tabs = [
@@ -120,25 +120,32 @@ export default function Home() {
           />
           <Sidebar links={tabs}/>
           <div>
-            <button id="signIn" className="home-btn">
-                Sign In
-            </button>
             <button id="signUp" className="home-btn">
-                Sign Up
+                Sign In
             </button>
           </div>
         </div>
         
         <main className="flex-1">
+          <div className="home-contentGroup home-contentGroup1">
+            <Image
+              className=""
+              src="/home_1.svg"
+              alt="home_1"
+              width={1150}
+              height={700}
+              priority
+            />
+            <p className="home-contentTitle home-contentGroup__text1">Welcome to Our Restaurant </p>
+            <svg width="504" height="4" viewBox="0 0 504 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2H502" stroke="#EA6D27" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+            <p className="home-contentDescription">SushiX Japanese Restaurant is the inheritance and perfection of the SushiY brand,  with a close and friendly Japanese restaurant model and nearly 100 Japanese dishes and desserts to serve Vietnamese friends who visit to enjoy every day.
+            </p>
+          </div>
           <div  className="home-contentGroup home-contentGroupGray">
-          <Image
-            className=""
-            src="/home_1.svg"
-            alt="home_1"
-            width={1150}
-            height={700}
-            priority
-          />
+            <p className="home-contentDescription">SushiX Japanese Restaurant is the inheritance and perfection of the SushiY brand,  with a close and friendly Japanese restaurant model and nearly 100 Japanese dishes and desserts to serve Vietnamese friends who visit to enjoy every day.
+            </p>
           </div>
         </main>
     </div>
