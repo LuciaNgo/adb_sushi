@@ -1,0 +1,39 @@
+#home-header {
+    width: 80%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    margin: 45px auto;
+    align-items: center;
+}
+
+.home-btn {
+    background-color: #000000;
+    color: #fff;
+    height: 64px;
+    width: 130px;
+    border-radius: 20px 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.home-btn + .home-btn {
+    margin-left: 20px;
+}
+
+#signUp {
+    background-color: #EA6D27;
+}
+
+.home-logo {
+    align-self: flex-start;
+}
+
+.home-contentGroup {
+    height: 1080px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-contentGroupGray {
+    background-color: rgb(73, 73, 73, 0.05);
+}
