@@ -136,16 +136,49 @@ export default function Home() {
               height={700}
               priority
             />
-            <p className="home-contentTitle home-contentGroup__text1">Welcome to Our Restaurant </p>
+            <p className="home-contentTitle home-contentGroup__text1">Welcome to Our Restaurant</p>
             <svg width="504" height="4" viewBox="0 0 504 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 2H502" stroke="#EA6D27" strokeWidth="3" strokeLinecap="round"/>
             </svg>
-            <p className="home-contentDescription">SushiX Japanese Restaurant is the inheritance and perfection of the SushiY brand,  with a close and friendly Japanese restaurant model and nearly 100 Japanese dishes and desserts to serve Vietnamese friends who visit to enjoy every day.
+            <p className="home-contentDescription0">SushiX Japanese Restaurant is the inheritance and perfection of the SushiY brand,  with a close and friendly Japanese restaurant model and nearly 100 Japanese dishes and desserts to serve Vietnamese friends who visit to enjoy every day.
             </p>
           </div>
-          <div  className="home-contentGroup home-contentGroupGray">
-            <p className="home-contentDescription">SushiX Japanese Restaurant is the inheritance and perfection of the SushiY brand,  with a close and friendly Japanese restaurant model and nearly 100 Japanese dishes and desserts to serve Vietnamese friends who visit to enjoy every day.
-            </p>
+          <div  className="home-contentGroup home-contentGroupGray home-contentGroup2">
+            <Image
+              className=""
+              src="/home_2.svg"
+              alt="home_2"
+              width={880}
+              height={600}
+              priority
+            />
+          </div>
+          <div id="home-contentGroupContent_1" className="home-contentGroupContent">
+            <p className="home-contentTitle home-contentGroup__text1">Menu</p>
+            <svg width="200" height="4" viewBox="0 0 200 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2H502" stroke="#EA6D27" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+            <p className="home-contentDescription0 home-contentDescription1">
+              SushiX menu is diverse with fresh colors from Lobster Sashimi, Japanese Scallops, Miyagi Oysters, etc. The key to culinary success comes from the freshest ingredients made from the talented hands of the chef.              </p>
+          </div>
+
+          <div  className="home-contentGroup">
+            <Image
+              className=""
+              src="/home_3.svg"
+              alt="home_3"
+              width={880}
+              height={600}
+              priority
+            />
+          </div>
+          <div id="home-contentGroupContent_2" className="home-contentGroupContent home-contentGroupContent1">
+            <p className="home-contentTitle home-contentGroup__text1">Reservation</p>
+            <svg width="200" height="4" viewBox="0 0 200 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2H502" stroke="#EA6D27" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+            <p className="home-contentDescription home-contentDescription1">
+              SushiX menu is diverse with fresh colors from Lobster Sashimi, Japanese Scallops, Miyagi Oysters, etc. The key to culinary success comes from the freshest ingredients made from the talented hands of the chef.              </p>
           </div>
         </main>
     </div>
