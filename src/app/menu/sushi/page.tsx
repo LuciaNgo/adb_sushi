@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
 import { FoodCard } from "@/ui/food-card";
@@ -31,7 +32,6 @@ const menuLinks = [
 // Sample menu items data
 const menuItems = [
     { title: "Fish and Veggie", price: 12 },
-    { title: "Fish and Veggie", price: 12 },
     { title: "Tofu Chili", price: 12 },
     { title: "Egg and Cucumber", price: 12 },
     { title: "Fish and Veggie", price: 12 },
@@ -39,6 +39,14 @@ const menuItems = [
     { title: "Egg and Cucumber", price: 12 },
     { title: "Fish and Veggie", price: 12 },
     { title: "Tofu Chili", price: 12 },
+    { title: "Fish and Veggie", price: 12 },
+    { title: "Tofu Chili", price: 12 },
+    { title: "Egg and Cucumber", price: 12 },
+    { title: "Fish and Veggie", price: 12 },
+    { title: "Tofu Chili", price: 12 },
+    { title: "Fish and Veggie", price: 12 },
+    { title: "Tofu Chili", price: 12 },
+    { title: "Egg and Cucumber", price: 12 },
 ];
 
 export const theme = {
@@ -50,6 +58,12 @@ export const theme = {
 
 export default function MenuPage() {
     const pathname = usePathname();
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const filteredMenuItems = menuItems.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    const itemsToRender = searchTerm ? filteredMenuItems : menuItems;
 
     return (
         <div>
@@ -58,8 +72,8 @@ export default function MenuPage() {
                     className="home-logo"
                     src="/logoSuShiX.svg"
                     alt="Next.js logo"
-                    width={198}
-                    height={55}
+                    width={180}
+                    height={40}
                     priority
                 />
                 <Sidebar links={tabs} />
@@ -73,26 +87,40 @@ export default function MenuPage() {
             <main className="flex-1">
                 <div className="home-contentGroup home-contentGroup1">
                     <div className="menu-container">
-
-                        <div className="menu-sidebar">
+                         <div className="menu-sidebar">
                             <div className="menu-categories">
                                 {menuLinks.map((link) => (
-                                    <div
-                                        key={link.id}
-                                        className={`menu-category ${
-                                            pathname === link.path ? "active-category" : ""
-                                        }`}
-                                    >
-                                        <Link href={link.path}>{link.label}</Link>
-                                    </div>
+                                     <div
+                                         key={link.id}
+                                         className={`menu-category ${
+                                             pathname === link.path ? "active-category" : ""
+                                         }`}
+                                     >
+                                         <Link href={link.path}>{link.label}</Link>
+                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="menu-grid">
-                            {menuItems.map((item, index) => (
-                                <FoodCard key={index} {...item} />
-                            ))}
+                        <div className="menu-content">
+                            <div className="search-bar">
+                                <input
+                                    type="text"
+                                    placeholder="Search dishes..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="search-input"
+                                />
+                            </div>
+                                  {itemsToRender.length > 0 ?
+                                      (
+                                          <div className="menu-grid">
+                                            {itemsToRender.map((item, index) => (
+                                                  <FoodCard key={index} {...item} />
+                                            ))}
+                                         </div>
+                                      ) : (<div className="menu-grid">No item found</div>)
+                                    }
                         </div>
                     </div>
                 </div>
