@@ -4,17 +4,17 @@ interface FoodCardProps {
   title: string
   description: string
   price: number
-  imageUrl: string
+  image: string
 }
 
-export function FoodCard({ title, description, price, imageUrl }: FoodCardProps) {
+export function CardBorder({ title, description, price, image }: FoodCardProps) {
   return (
     <div className="relative w-[248px] h-[290px]">
       <FoodCardBorder />
       <div className="relative h-full p-4 flex flex-col items-center">
         <div className="relative">
           <img
-            src={imageUrl}
+            src={image}
             alt={title}
             className="w-[180px] h-[180px] rounded-full object-cover"
           />

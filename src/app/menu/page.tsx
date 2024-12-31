@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
-import { MenuCard } from '@/ui/menu-sidebar';
+import { FoodCard } from '@/ui/food-card';
 import "@/styles/home.css";
 import "@/styles/menu.css";
 
@@ -46,6 +46,24 @@ const menuItems = [
     price: 12,
     image: "/placeholder.svg?height=300&width=300"
   },
+  {
+    title: "Fish and Veggie",
+    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
+    price: 12,
+    image: "/placeholder.svg?height=300&width=300"
+  },
+  {
+    title: "Tofu Chili",
+    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
+    price: 12,
+    image: "/placeholder.svg?height=300&width=300"
+  },
+  {
+    title: "Egg and Cucumber",
+    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
+    price: 12,
+    image: "/placeholder.svg?height=300&width=300"
+  },
   // Add more items as needed
 ];
 
@@ -53,45 +71,44 @@ const menuItems = [
 export default function MenuPage() {
   return (
     <div>
-            <div id="home-header">
-              <Image
-                className="home-logo"
-                src="/logoSuShiX.svg"
-                alt="Next.js logo"
-                width={198}
-                height={55}
-                priority
-              />
-              <Sidebar links={tabs}/>
-              <div>
-                <button id="signUp" className="home-btn">
-                    Sign In
-                </button>
+      <div id="home-header">
+        <Image
+          className="home-logo"
+          src="/logoSuShiX.svg"
+          alt="Next.js logo"
+          width={198}
+          height={55}
+          priority
+        />
+        <Sidebar links={tabs}/>
+        <div>
+          <button id="signUp" className="home-btn">
+              Sign In
+          </button>
+        </div>
+      </div>
+            
+      <main className="flex-1">  
+        <div className="home-contentGroup home-contentGroup1">
+          <div className="menu-container">         
+            <div className="menu-sidebar">
+              <div className="menu-categories">
+                {menuLinks.map((link) => (
+                  <a key={link.id} href={link.path} className="menu-category">
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </div>
             
-            <main className="flex-1">  
-              <div className="home-contentGroup home-contentGroup1">
-                <div className="menu-container">         
-                  <div className="menu-sidebar">
-                    <div className="menu-categories">
-                      {menuLinks.map((link) => (
-                        <a key={link.id} href={link.path} className="menu-category">
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-            
-                  <div className="menu-grid">
-                    {menuItems.map((item, index) => (
-                      <MenuCard key={index} {...item} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </main>
+            <div className="menu-grid">
+              {menuItems.map((item, index) => (
+                <FoodCard key={index} {...item} />
+              ))}
+            </div>
+          </div>
         </div>
+      </main>
+    </div>
   );
 }
-
