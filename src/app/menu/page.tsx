@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
-import { FoodCard } from '@/ui/food-card';
+import { FoodCard } from "@/ui/food-card";
 import "@/styles/home.css";
 import "@/styles/menu.css";
 
@@ -30,40 +30,36 @@ const menuLinks = [
 const menuItems = [
   {
     title: "Fish and Veggie",
-    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
     price: 12,
-    image: "/placeholder.svg?height=300&width=300"
   },
   {
     title: "Tofu Chili",
-    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
     price: 12,
-    image: "/placeholder.svg?height=300&width=300"
   },
   {
     title: "Egg and Cucumber",
-    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
     price: 12,
-    image: "/placeholder.svg?height=300&width=300"
+  },
+  {
+      title: "Fish and Veggie",
+      price: 12,
+  },
+  {
+      title: "Tofu Chili",
+      price: 12,
+  },
+  {
+      title: "Egg and Cucumber",
+      price: 12,
   },
   {
     title: "Fish and Veggie",
-    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
     price: 12,
-    image: "/placeholder.svg?height=300&width=300"
-  },
-  {
+},
+{
     title: "Tofu Chili",
-    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
     price: 12,
-    image: "/placeholder.svg?height=300&width=300"
-  },
-  {
-    title: "Egg and Cucumber",
-    description: "Lorem ipsum dolor sit, consectetur adipiscing elit, sed do eiusmod tempor",
-    price: 12,
-    image: "/placeholder.svg?height=300&width=300"
-  },
+},
   // Add more items as needed
 ];
 
@@ -88,18 +84,18 @@ export default function MenuPage() {
         </div>
       </div>
             
-      <main className="flex-1">  
+      <main className="flex-1">
         <div className="home-contentGroup home-contentGroup1">
-          <div className="menu-container">         
-            <div className="menu-sidebar">
-              <div className="menu-categories">
-                {menuLinks.map((link) => (
-                  <a key={link.id} href={link.path} className="menu-category">
-                    {link.label}
-                  </a>
-                ))}
+          <div className="menu-container">
+              <div className="menu-sidebar">
+                  <div className="menu-categories">
+                      {menuLinks.map((link) => (
+                          <a key={link.id} href={link.path} className="menu-category">
+                              {link.label}
+                          </a>
+                      ))}
+                  </div>
               </div>
-            </div>
             
             <div className="menu-grid">
               {menuItems.map((item, index) => (

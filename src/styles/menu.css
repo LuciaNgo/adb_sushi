@@ -6,7 +6,7 @@
   
   .menu-sidebar {
     position: relative;
-    min-width: 248px;
+    min-width: 180px;
   }
   
   .menu-border {
@@ -19,10 +19,10 @@
   }
   
   .menu-categories {
-    padding: 2rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0rem;
   }
   
   .menu-category {
@@ -30,6 +30,14 @@
     color: #374151;
     cursor: pointer;
     transition: color 0.2s;
+    border: 1px solid #EBEBEB; /* Added border */
+    border-radius: 0rem;   /*Added rounded border*/
+    width: 200px;     /* Added width */
+    height: 56px;   /* Added height*/
+    flex-shrink: 0;   /*Added flex-shrink to make element not flexible*/
+    display: flex; /* Added display flex to center text */
+    justify-content: center; /* added justify content to center text */
+    align-items: center;  /*added align-items to center text*/
   }
   
   .menu-category:hover {
@@ -38,7 +46,7 @@
   
   .menu-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     flex: 1;
   }
@@ -67,7 +75,12 @@
     background: #1F2937;
     color: white;
     padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
+    border-radius: 50%; /* Changed to 50% for circle */
+    width: 3rem; /* Added width for circle */
+    height: 3rem; /* Added height for circle */
+    display: flex; /* added display to center price */
+    justify-content: center; /* added justify content to center price */
+    align-items: center; /* added align-items to center price */
   }
   
   .menu-item-title {
