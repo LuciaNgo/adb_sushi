@@ -49,44 +49,49 @@ const menuItems = [
   // Add more items as needed
 ];
 
+
 export default function MenuPage() {
   return (
     <div>
-        <div id="home-header">
-          <Image
-            className="home-logo"
-            src="/logoSuShiX.svg"
-            alt="Next.js logo"
-            width={198}
-            height={55}
-            priority
-          />
-          <Sidebar links={tabs}/>
-          <div>
-            <button id="signUp" className="home-btn">
-                Sign In
-            </button>
-          </div>
+            <div id="home-header">
+              <Image
+                className="home-logo"
+                src="/logoSuShiX.svg"
+                alt="Next.js logo"
+                width={198}
+                height={55}
+                priority
+              />
+              <Sidebar links={tabs}/>
+              <div>
+                <button id="signUp" className="home-btn">
+                    Sign In
+                </button>
+              </div>
+            </div>
+            
+            <main className="flex-1">  
+              <div className="home-contentGroup home-contentGroup1">
+                <div className="menu-container">         
+                  <div className="menu-sidebar">
+                    <div className="menu-categories">
+                      {menuLinks.map((link) => (
+                        <a key={link.id} href={link.path} className="menu-category">
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+            
+                  <div className="menu-grid">
+                    {menuItems.map((item, index) => (
+                      <MenuCard key={index} {...item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </main>
         </div>
-      
-      <div className="menu-container">
-        <div className="menu-sidebar">
-          <div className="menu-categories">
-            {menuLinks.map((link) => (
-              <a key={link.id} href={link.path} className="menu-category">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-        
-        <div className="menu-grid">
-          {menuItems.map((item, index) => (
-            <MenuCard key={index} {...item} />
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
 
