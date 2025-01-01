@@ -51,7 +51,7 @@
 
 .delivery-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .delivery-search-input {
-  width: 568px;
+  width: 700px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -135,6 +135,14 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
+}
+.delivery-order-item-info h3 {
+  text-align: left;
+   flex: 1;
+}
+.delivery-order-item-info p {
+  text-align: right;
 }
 
 .delivery-order-total {

@@ -46,10 +46,14 @@ interface deliveryItem {
   price: number;
 }
 
+interface CartItem extends deliveryItem {
+    quantity: number
+}
+
 export default function DeliveryPage() {
   const pathname = usePathname();
   const [searchTerm, setSearchTerm] = useState("");
-  const [cart, setCart] = useState<deliveryItem[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
   const [showOrderView, setShowOrderView] = useState(true); // Always show order view
 
   const filtereddeliveryItems = deliveryItems.filter((item) =>
@@ -57,16 +61,26 @@ export default function DeliveryPage() {
   );
   const itemsToRender = searchTerm ? filtereddeliveryItems : deliveryItems;
 
-  const handleAddToCart = (item: deliveryItem) => {
-    setCart([...cart, item]);
+ const handleAddToCart = (item: deliveryItem) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem.title === item.title);
+      if (existingItem) {
+        return prevCart.map((cartItem) =>
+          cartItem.title === item.title ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
   };
+
 
   const handleToggleOrderView = () => {
     setShowOrderView(!showOrderView);
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price, 0);
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   return (
@@ -97,7 +111,7 @@ export default function DeliveryPage() {
                   <div
                     key={link.id}
                     className={`delivery-category ${
-                      pathname === link.path ? "active-category" : ""
+                      pathname === link.path ? "delivery-active-category" : ""
                     }`}
                   >
                     <Link href={link.path}>{link.label}</Link>
@@ -107,7 +121,9 @@ export default function DeliveryPage() {
             </div>
 
             <div
-              className="delivery-content" >
+              className="delivery-content"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
               <div className="delivery-search-bar">
                 <input
                   type="text"
@@ -117,7 +133,7 @@ export default function DeliveryPage() {
                   className="delivery-search-input"
                 />
               </div>
-                <div className="delivery-grid" >
+                <div className="delivery-grid">
                     {itemsToRender.map((item, index) => (
                        <FoodCardDelivery
                           key={index}
@@ -144,8 +160,11 @@ export default function DeliveryPage() {
                                         height={50}
                                         className="rounded-full object-cover"
                                        />
-                                       <h3>{item.title}</h3>
-                                        <p>{item.price.toLocaleString()} VND</p>
+                                       <h3 style={{textAlign: 'left'}}>{item.title}</h3>
+                                          <div style={{textAlign: 'right'}}>
+                                             <p style={{margin: 0}}>{item.price.toLocaleString()} VND</p>
+                                           <p style={{fontSize: '0.8rem', margin: 0}}>x {item.quantity}</p>
+                                        </div>
                                       </div>
                                  </div>
                             );
@@ -155,7 +174,6 @@ export default function DeliveryPage() {
                     </div>
                      <button className="delivery-order-button">Order</button>
                 </div>
-           
           </div>
         </div>
       </main>
