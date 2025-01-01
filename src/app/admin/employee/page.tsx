@@ -41,6 +41,10 @@ const revenueData = [
     { id: "HĐ000002", phone: "0822394853", date: "11-12-2004", total: 1500000, branch: "CN00002" },
     { id: "HĐ000003", phone: "0782938274", date: "23-12-2024", total: 560000, branch: "CN00002" },
     { id: "HĐ000004", phone: "0897482848", date: "27-12-2024", total: 800000, branch: "CN00002" },
+    { id: "HĐ000005", phone: "0935363664", date: "27-12-2004", total: 350000, branch: "CN00002" },
+    { id: "HĐ000006", phone: "0822374775", date: "28-12-2004", total: 1560000, branch: "CN00002" },
+    { id: "HĐ000007", phone: "0786070053", date: "29-12-2024", total: 700000, branch: "CN00002" },
+    { id: "HĐ000008", phone: "0895667477", date: "30-12-2024", total: 850000, branch: "CN00002" },
   ];
 
 const employeeData = [
@@ -48,6 +52,10 @@ const employeeData = [
   { id: "NV000002", employeeName: "Richard Zhao", point: "9", role: "Security", branch: "CN00004" },
   { id: "NV000003", employeeName: "Lady Gaga", point: "4.5", role: "Sale", branch: "CN00003" },
   { id: "NV000004", employeeName: "Mickey Mouse", point: "7.8", role: "Service", branch: "CN00005" },
+  { id: "NV000005", employeeName: "John Lee", point: "10", role: "Cook", branch: "CN00002" },
+  { id: "NV000006", employeeName: "Richard Zhao", point: "9", role: "Security", branch: "CN00004" },
+  { id: "NV000007", employeeName: "Lady Gaga", point: "4.5", role: "Sale", branch: "CN00003" },
+  { id: "NV000008", employeeName: "Mickey Mouse", point: "7.8", role: "Service", branch: "CN00005" },
 ];
 
 const timeFilters = [

@@ -192,6 +192,7 @@ body {
 
 .revenue-table {
     width: 1180px;
+    height: 350px;
     overflow-x: auto;
     border: 1px solid #ebebeb;
     border-radius: 0.5rem;
@@ -200,8 +201,7 @@ body {
 }
 
 .revenue-table table {
-    width: 1179px;
-    height: 50px;
+    width: 1160px;
     border-collapse: collapse;
 }
 .revenue-table th,
@@ -287,6 +287,7 @@ body {
 }
 
 .employees-table {
+    height: 350px;
     overflow-x: auto;
     border: 1px solid #ebebeb;
     border-radius: 0.5rem;
