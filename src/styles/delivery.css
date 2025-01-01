@@ -1,0 +1,175 @@
+.delivery-container {
+  display: flex;
+  padding: 2rem 4rem;
+  gap: 2rem;
+  margin-top: -25px;
+  position: relative;
+}
+
+.delivery-sidebar {
+  position: relative;
+  min-width: 170px;
+}
+
+.delivery-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.delivery-categories {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.delivery-category {
+  font-size: 1rem;
+  color: #374151;
+  cursor: pointer;
+  transition: color 0.2s;
+  border: none;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+  padding: 0.25rem;
+}
+
+.delivery-category:hover {
+  color: #4F46E5;
+}
+
+.delivery-active-category {
+  font-weight: bold;
+}
+
+.delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+
+.delivery-content {
+    flex: 1;
+    position: relative;
+     margin-right: 0;
+}
+
+.delivery-item {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid #EBEBEB;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.delivery-item-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.delivery-item-price-title {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #ec9b30;
+  margin-bottom: 0.5rem;
+}
+
+.delivery-item-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-top: 0.75rem;
+}
+
+.delivery-item-description {
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+.delivery-search-bar {
+  margin-bottom: 20px;
+}
+
+.delivery-search-input {
+  width: 700px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.delivery-order-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #EBEBEB;
+  border-radius: 1rem;
+  width: 350px; /* Tăng chiều rộng */
+  margin-right: 0; /* Giảm căng lề phải */
+  margin-left: auto; /* Dịch phần tử sang phải */
+}
+
+
+.delivery-order-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.delivery-order-item-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+.delivery-order-item-info h3 {
+  text-align: left;
+   flex: 1;
+}
+.delivery-order-item-info p {
+  text-align: right;
+}
+
+.delivery-order-total {
+  padding: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.delivery-order-button {
+  padding: 0.5rem 1rem;
+  background-color: #EA6D27;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+
+.delivery-add-to-cart-button {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: #4F46E5;
+   border: 1px solid #4F46E5;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: auto;
+  align-self: flex-start;
+}

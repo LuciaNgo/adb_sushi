@@ -1,0 +1,119 @@
+.menu-container {
+  display: flex;
+  padding: 2rem 4rem;
+  gap: 2rem;
+  margin-top: -25px;
+}
+
+.menu-sidebar {
+  position: relative;
+  min-width: 170px;
+}
+
+.menu-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.menu-categories {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+  .menu-category {
+  font-size: 1rem;
+  color: #374151;
+  cursor: pointer;
+  transition: color 0.2s;
+  border: none; /* Added border none */
+  border-radius: 0; /* Added border radius to none*/
+  width: auto; /* Remove the width from the category*/
+  height: auto;/* Remove the height from the category */
+   flex-shrink: 0;
+  display: block; /* added display block to make content take the whole row */
+   padding: 0.25rem; /* Added padding */
+}
+
+.menu-category:hover {
+  color: #4F46E5;
+}
+
+.active-category {
+ font-weight: bold;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  flex: 1;
+}
+
+.menu-content {
+  flex: 1;
+  position: relative;
+}
+
+.menu-item {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid #EBEBEB;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.menu-item-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.menu-item-price {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ec9b30;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+}
+
+.menu-item-price-title {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #ec9b30;
+  margin-bottom: 0;
+}
+
+
+.menu-item-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-top: 0.75rem;
+}
+
+.menu-item-description {
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 950px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
