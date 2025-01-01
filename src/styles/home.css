@@ -1,36 +1,9 @@
 body {
     font-family: "Poppins", serif;
+    font-size: 1rem;
 }
 
-#home-header {
-    width: 80%;
-    height: 75px;
-    display: flex;
-    justify-content: space-between;
-    margin: 10px auto 10px;
-    align-items: center;
-}
 
-.home-btn {
-    background-color: #000000;
-    color: #fff;
-    height: 64px;
-    width: 130px;
-    border-radius: 20px 5px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-}
-
-.home-btn + .home-btn {
-    margin-left: 20px;
-}
-
-#signUp {
-    background-color: #EA6D27;
-}
-
-.home-logo {
-    align-self: flex-start;
-}
 
 .home-contentGroup {
     height: 950px;
@@ -53,6 +26,7 @@ body {
     background-color: rgb(73, 73, 73, 0.05);
 }
 
+
 .home-contentImage {
     width: fit-content;
 }
@@ -70,9 +44,19 @@ body {
 
 .home-contentDescription0 {
     width: 80%;
-    font-size: 25px;
+    font-size: 22px;
     text-align: center;
     margin-top: 30px;
+}
+
+.home-contentDescription1 {
+    text-align: left;
+    font-size: 20px;
+    width:70%;
+}
+
+.home-contentDescription2 {
+    text-align: right;
 }
 
 .home-contentGroupContent {
@@ -80,20 +64,8 @@ body {
     height: 650px;
     border: solid #000000;
     align-content: center;
-    padding-left: 100px;
+    padding: 0 100px;
     position: absolute;
-}
-
-.home-contentDescription1 {
-    text-align: left;
-    font-size: 20px;
-    width:50%;
-}
-
-.home-contentDescription2 {
-    text-align: right;
-    font-size: 20px;
-    width:50%;
 }
 
 #home-contentGroupContent_1 {
@@ -104,8 +76,10 @@ body {
 #home-contentGroupContent_2 {
     top: calc(75px + 990px + 950px + (950px - 610px)/2);
     right: 5%;
-    text-align: right;
-    justify-items: right;
+    padding-left: 300px;
+    padding-right: 0px;
 }
 
-
+#home-contentGroupContent_3 {
+    top: calc(75px + 990px + 2*950px + (950px - 610px)/2);
+}

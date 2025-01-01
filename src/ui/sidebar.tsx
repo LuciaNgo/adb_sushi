@@ -17,7 +17,7 @@ export function Sidebar({ links }: SidebarProps) {
     return (
         <div className="h-24">
             <SideNav defaultSelectedPath={links[0]?.id || "home"} theme={theme}>
-                <div id = "home-sidebar" className="flex">
+                <div id = "sidebar" className="flex">
                     {links.map((link) => (
                         <Nav id={link.id} key={link.id}>
                             <Link href={link.path}>{link.label}</Link>

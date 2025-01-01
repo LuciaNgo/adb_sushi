@@ -1,7 +1,10 @@
 "use client";
 import Image from "next/image";
-import { Sidebar } from '@/ui/sidebar';
+import { Sidebar } from "@/ui/sidebar";
 import "@/styles/home.css"
+import Page from "../ui/home";
+import { useRouter } from "next/navigation";
+
 
 const tabs = [
   { id: "home", label: "Home", path: "/" },
@@ -10,6 +13,28 @@ const tabs = [
   { id: "delivery", label: "Delivery", path: "/delivery" },
   { id: "about", label: "About", path: "/about" },
 ];
+
+export function Header() {
+  const router = useRouter();
+  return (
+    <div id="header">
+      <Image
+        className="header-logo"
+        src="/logoSuShiX.svg"
+        alt="Next.js logo"
+        width={180}
+        height={40}
+        priority
+      />
+      <Sidebar links={tabs}/>
+      <div>
+        <button className="header-btn" onClick={() => router.push("/signin")}>
+            Sign In
+        </button>
+      </div>
+    </div>
+);
+}
 
 export default function Home() {
   return (
@@ -109,22 +134,7 @@ export default function Home() {
     //   </footer>
     // </div>
     <div>
-        <div id="home-header">
-          <Image
-            className="home-logo"
-            src="/logoSuShiX.svg"
-            alt="Next.js logo"
-            width={198}
-            height={55}
-            priority
-          />
-          <Sidebar links={tabs}/>
-          <div>
-            <button id="signUp" className="home-btn">
-                Sign In
-            </button>
-          </div>
-        </div>
+        <Header/>
         
         <main className="flex-1">
           <div className="home-contentGroup home-contentGroup1">
@@ -143,6 +153,7 @@ export default function Home() {
             <p className="home-contentDescription0">SushiX Japanese Restaurant is the inheritance and perfection of the SushiY brand,  with a close and friendly Japanese restaurant model and nearly 100 Japanese dishes and desserts to serve Vietnamese friends who visit to enjoy every day.
             </p>
           </div>
+
           <div  className="home-contentGroup home-contentGroupGray home-contentGroup2">
             <Image
               className=""
@@ -156,7 +167,7 @@ export default function Home() {
           <div id="home-contentGroupContent_1" className="home-contentGroupContent">
             <p className="home-contentTitle home-contentGroup__text1">Menu</p>
             <svg width="200" height="4" viewBox="0 0 200 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2H502" stroke="#EA6D27" strokeWidth="3" strokeLinecap="round"/>
+              <path d="M2 2H502" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
             </svg>
             <p className="home-contentDescription0 home-contentDescription1">
               SushiX menu is diverse with fresh colors from Lobster Sashimi, Japanese Scallops, Miyagi Oysters, etc. The key to culinary success comes from the freshest ingredients made from the talented hands of the chef.              </p>
@@ -174,13 +185,34 @@ export default function Home() {
           </div>
           <div id="home-contentGroupContent_2" className="home-contentGroupContent home-contentGroupContent1">
             <p className="home-contentTitle home-contentGroup__text1">Reservation</p>
-            <svg width="200" height="4" viewBox="0 0 200 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2H502" stroke="#EA6D27" strokeWidth="3" strokeLinecap="round"/>
+            <svg width="250" height="4" viewBox="0 0 300 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2H502" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <p className="home-contentDescription home-contentDescription1">
+            <p className="home-contentDescription0 home-contentDescription1">
+            SushiX menu is diverse with fresh colors from Lobster Sashimi, Japanese Scallops, Miyagi Oysters, etc. The key to culinary success comes from the freshest ingredients made from the talented hands of the chef.
+            </p>
+          </div>
+
+          <div  className="home-contentGroup home-contentGroupGray home-contentGroup2">
+            <Image
+              className=""
+              src="/home_4.svg"
+              alt="home_4"
+              width={880}
+              height={600}
+              priority
+            />
+          </div>
+          <div id="home-contentGroupContent_3" className="home-contentGroupContent">
+            <p className="home-contentTitle home-contentGroup__text1">Delivery</p>
+            <svg width="200" height="4" viewBox="0 0 200 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2H502" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <p className="home-contentDescription0 home-contentDescription1">
               SushiX menu is diverse with fresh colors from Lobster Sashimi, Japanese Scallops, Miyagi Oysters, etc. The key to culinary success comes from the freshest ingredients made from the talented hands of the chef.              </p>
           </div>
         </main>
+        <Page/>
     </div>
   );
 }
