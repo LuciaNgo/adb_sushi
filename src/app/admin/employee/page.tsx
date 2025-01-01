@@ -37,15 +37,15 @@ export function Header() {
 }
 
 const revenueData = [
-    { id: "HĐ000001", phone: "0937432754", date: "11-12-2004", total: 325000, branch: "CN00002" },
-    { id: "HĐ000002", phone: "0822394853", date: "11-12-2004", total: 1500000, branch: "CN00002" },
-    { id: "HĐ000003", phone: "0782938274", date: "23-12-2024", total: 560000, branch: "CN00002" },
-    { id: "HĐ000004", phone: "0897482848", date: "27-12-2024", total: 800000, branch: "CN00002" },
-    { id: "HĐ000005", phone: "0935363664", date: "27-12-2004", total: 350000, branch: "CN00002" },
-    { id: "HĐ000006", phone: "0822374775", date: "28-12-2004", total: 1560000, branch: "CN00002" },
-    { id: "HĐ000007", phone: "0786070053", date: "29-12-2024", total: 700000, branch: "CN00002" },
-    { id: "HĐ000008", phone: "0895667477", date: "30-12-2024", total: 850000, branch: "CN00002" },
-  ];
+  { id: "HĐ000001", phone: "0937432754", date: "11-12-2004", total: 325000, branch: "CN00002" },
+  { id: "HĐ000002", phone: "0822394853", date: "11-12-2004", total: 1500000, branch: "CN00002" },
+  { id: "HĐ000003", phone: "0782938274", date: "23-12-2024", total: 560000, branch: "CN00002" },
+  { id: "HĐ000004", phone: "0897482848", date: "27-12-2024", total: 800000, branch: "CN00002" },
+  { id: "HĐ000005", phone: "0935363664", date: "27-12-2004", total: 350000, branch: "CN00002" },
+  { id: "HĐ000006", phone: "0822374775", date: "28-12-2004", total: 1560000, branch: "CN00002" },
+  { id: "HĐ000007", phone: "0786070053", date: "29-12-2024", total: 700000, branch: "CN00002" },
+  { id: "HĐ000008", phone: "0895667477", date: "30-12-2024", total: 850000, branch: "CN00002" },
+];
 
 const employeeData = [
   { id: "NV000001", employeeName: "John Lee", point: "10", role: "Cook", branch: "CN00002" },
@@ -84,8 +84,8 @@ const branchFilters = [
 ];
 
 function formatPrice(price: number): string {
-    return new Intl.NumberFormat("vi-VN").format(price);
-  }
+  return new Intl.NumberFormat("vi-VN").format(price);
+}
 
 export default function Home() {
   const revenueRef = useRef<HTMLDivElement>(null);
@@ -96,9 +96,11 @@ export default function Home() {
   };
 
   // State riêng cho từng Listbox
-  const [revenueFilter, setRevenueFilter] = useState(timeFilters[0]); 
+  const [revenueFilter, setRevenueFilter] = useState(timeFilters[0]);
   const [employeeFilter, setEmployeeFilter] = useState(timeFilters[0]);
   const [selectedBranch, setSelectedBranch] = useState(branchFilters[0]);
+   const [selectedRevenueBranch, setSelectedRevenueBranch] = useState(branchFilters[0]);
+
 
   return (
     <div>
@@ -118,70 +120,69 @@ export default function Home() {
         </div>
 
         <div ref={revenueRef} className="revenue-section-wrapper">
-          <div className="revenue-section">
-            <h2 className="revenue-title">Revenue</h2>
-
-            {/* Listbox cho Revenue */}
-            <Listbox value={revenueFilter} onChange={setRevenueFilter}>
-              <div className="listbox-container">
-                <Listbox.Button className="listbox-button">
-                  {revenueFilter.name}
-                </Listbox.Button>
-                <Listbox.Options className="listbox-options">
-                  {timeFilters.map((time) => (
-                    <Listbox.Option
-                      key={time.id}
-                      className="listbox-option"
-                      value={time}>
-                      {time.name}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </div>
-            </Listbox>
-
-            <div className={"revenue-data"}>
-              <div className={"data-cards"}>
-                <div className={"data-card"}>
-                  <p>Customer</p>
-                  <p>150</p>
-                  <div className={"bar-chart-small"} style={{backgroundColor: '#34d399'}}></div>
+           <div className="revenue-section">
+             <h2 className="revenue-title">Revenue</h2>
+              <div className="revenue-table-wrapper">
+                  <div className="revenue-table-action">
+                    {/* Listbox cho Revenue Time Filter */}
+                     <Listbox value={revenueFilter} onChange={setRevenueFilter}>
+                      <div className="listbox-container">
+                        <Listbox.Button className="listbox-button">
+                         {revenueFilter.name}
+                        </Listbox.Button>
+                        <Listbox.Options className="listbox-options">
+                         {timeFilters.map((time) => (
+                          <Listbox.Option
+                           key={time.id}
+                           className="listbox-option"
+                           value={time}>
+                            {time.name}
+                          </Listbox.Option>
+                         ))}
+                        </Listbox.Options>
+                       </div>
+                      </Listbox>
+                  </div>
+                <div className={"revenue-data"}>
+                 <div className={"data-cards"}>
+                   <div className={"data-card"}>
+                     <p>Customer</p>
+                     <p>150</p>
+                     <div className={"bar-chart-small"} style={{ backgroundColor: '#34d399' }}></div>
+                   </div>
+                   <div className={"data-card"}>
+                     <p>Total</p>
+                     <p>{formatPrice(5000000)}</p>
+                     <div className={"bar-chart-small"} style={{ backgroundColor: '#34d399' }}></div>
+                   </div>
+                 </div>
                 </div>
-                <div className={"data-card"}>
-                  <p>Total</p>
-                  <p>{formatPrice(5000000)}</p>
-                  <div className={"bar-chart-small"}  style={{backgroundColor: '#34d399'}}></div>
+                  <div className="revenue-table">
+                   <table>
+                     <thead>
+                       <tr>
+                         <th>Invoice ID</th>
+                         <th>Customer Phone</th>
+                         <th>Payment Date</th>
+                         <th>Total Cost</th>
+                         <th>Branch</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       {revenueData.map((invoice) => (
+                         <tr key={invoice.id}>
+                           <td>{invoice.id}</td>
+                           <td>{invoice.phone}</td>
+                           <td>{invoice.date}</td>
+                           <td>{formatPrice(invoice.total)}</td>
+                           <td>{invoice.branch}</td>
+                         </tr>
+                       ))}
+                     </tbody>
+                   </table>
+                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-
-             <div className="revenue-table-wrapper">
-             <div className="revenue-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Invoice ID</th>
-                      <th>Customer Phone</th>
-                      <th>Payment Date</th>
-                      <th>Total Cost</th>
-                      <th>Branch</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {revenueData.map((invoice) => (
-                      <tr key={invoice.id}>
-                        <td>{invoice.id}</td>
-                        <td>{invoice.phone}</td>
-                        <td>{invoice.date}</td>
-                        <td>{formatPrice(invoice.total)}</td>
-                        <td>{invoice.branch}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-             </div>
 
 
           <div className="employees-section">
@@ -210,13 +211,12 @@ export default function Home() {
                 <input
                   placeholder="Search ID"
                   className="employees-search-id"
-                  
                 />
                 <input
                   placeholder="Search employee name"
                   className="employees-search-name"
                 />
-                
+
                 {/* Listbox cho Chi nhánh */}
                 <Listbox value={selectedBranch} onChange={setSelectedBranch}>
                   <div className="listbox-container">

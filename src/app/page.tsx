@@ -10,7 +10,7 @@ const tabs = [
   { id: "menu", label: "Menu", path: "/menu" },
   { id: "booking", label: "Booking", path: "/booking" },
   { id: "delivery", label: "Delivery", path: "/delivery" },
-  { id: "about", label: "About", path: "/admin/employee" },
+  { id: "about", label: "About", path: "/admin/manager"},
 ];
 
 export function Header() {
