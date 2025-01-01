@@ -1,0 +1,67 @@
+/* #signIn-page {
+    font-family: "Poppins", serif;
+    font-size: 20px;
+} */
+
+.signIn-background {
+    max-height: 100vh;
+    max-width: fit-content;
+}
+
+.signIn-signIn {
+    justify-self: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.signIn-content {
+    width: calc(55% + 5px);
+    height: 100%;
+    background-color: #fff;
+    align-self: left;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    padding: 25px 120px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.signIn-form {
+    font-weight: 500;
+}
+
+.signIn-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.signIn-form-group-input {
+    border: solid #000;
+    height: 50px;
+    border-radius: 5px;
+    border-color: #CBCAD7;
+    font-weight: 400;
+
+}
+
+.signIn-form-btn {
+    width: 100%;
+    height: 60px;
+    color: #fff;
+    justify-self: center;
+    background-color: #EA6D27;
+    border-radius: 30px;
+    margin-top: 50px;
+}
+
+.signIn-form-btn + .signIn-form-btn {
+    margin-top: 25px;
+}
+
+#signIn-goBack {
+    background-color: #000;
+}
