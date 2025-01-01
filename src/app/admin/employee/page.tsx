@@ -143,22 +143,14 @@ export default function Home() {
             <div className={"revenue-data"}>
               <div className={"data-cards"}>
                 <div className={"data-card"}>
-                  <p>Orders</p>
-                  <p>$72,000</p>
-                  <p>↑ 23%</p>
-                  <div className={"bar-chart-small"}></div>
-                </div>
-                <div className={"data-card"}>
-                  <p>Delivery</p>
-                  <p>500</p>
-                  <p>↓ 6%</p>
-                  <div className={"bar-chart-small"}  style={{backgroundColor: '#34d399'}}></div>
+                  <p>Customer</p>
+                  <p>150</p>
+                  <div className={"bar-chart-small"} style={{backgroundColor: '#34d399'}}></div>
                 </div>
                 <div className={"data-card"}>
                   <p>Total</p>
-                  <p>100</p>
-                  <p>↓ 9%</p>
-                  <div className={"bar-chart-small"}  style={{backgroundColor: '#f59e0b'}}></div>
+                  <p>{formatPrice(5000000)}</p>
+                  <div className={"bar-chart-small"}  style={{backgroundColor: '#34d399'}}></div>
                 </div>
               </div>
             </div>
@@ -182,7 +174,7 @@ export default function Home() {
                         <td>{invoice.id}</td>
                         <td>{invoice.phone}</td>
                         <td>{invoice.date}</td>
-                        <td>{invoice.total}</td>
+                        <td>{formatPrice(invoice.total)}</td>
                         <td>{invoice.branch}</td>
                       </tr>
                     ))}
