@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { Sidebar } from "@/ui/sidebar";
 import "@/styles/home.css"
-import Page from "../ui/home";
 import { useRouter } from "next/navigation";
 
 
@@ -117,7 +116,6 @@ export default function Home() {
               SushiX menu is diverse with fresh colors from Lobster Sashimi, Japanese Scallops, Miyagi Oysters, etc. The key to culinary success comes from the freshest ingredients made from the talented hands of the chef.              </p>
           </div>
         </main>
-        <Page/>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
 import { FoodCardDelivery } from "@/ui/food-card-delivery";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import "@/styles/home.css";
 import "@/styles/delivery.css";
@@ -87,6 +87,28 @@ const menuItems = {
     ]
 };
 
+export function Header() {
+  const router = useRouter();
+  return (
+    <div id="header">
+      <Image
+        className="header-logo"
+        src="/logoSuShiX.svg"
+        alt="Next.js logo"
+        width={180}
+        height={40}
+        priority
+      />
+      <Sidebar links={tabs}/>
+      <div>
+        <button className="header-btn" onClick={() => router.push("/signin")}>
+            Sign In
+        </button>
+      </div>
+    </div>
+);
+}
+
 interface DeliveryItem {
   title: string;
   price: number;
@@ -133,22 +155,7 @@ export default function DeliveryPage() {
 
   return (
     <div>
-      <div id="home-header">
-        <Image
-          className="home-logo"
-          src="/logoSuShiX.svg"
-          alt="Next.js logo"
-          width={180}
-          height={40}
-          priority
-        />
-        <Sidebar links={tabs} />
-        <div>
-          <button id="signUp" className="home-btn">
-            Sign In
-          </button>
-        </div>
-      </div>
+      <Header/>
 
       <main className="flex-1">
         <div className="home-contentGroup home-contentGroup1">
