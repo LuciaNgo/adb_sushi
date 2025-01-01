@@ -3,16 +3,6 @@ import Image from 'next/image';
 import { Sidebar } from '@/ui/sidebar';
 import "@/styles/employee-statistics.css";
 import { useState, useRef } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 import { Listbox } from '@headlessui/react';
 import { useRouter } from "next/navigation";
 
@@ -53,22 +43,31 @@ const employeeData = [
   { id: "NV000004", employeeName: "Mickey Mouse", diemphucvu: "7.8", role: "Service", chinhanh: "CN00005" },
 ];
 
-const revenueData = [
-  { name: 'Jan', online: 40000, offline: 24000 },
-  { name: 'Feb', online: 30000, offline: 13980 },
-  { name: 'Mar', online: 20000, offline: 9800 },
-  { name: 'Apr', online: 27800, offline: 39000 },
-  { name: 'May', online: 18900, offline: 48000 },
-  { name: 'Jun', online: 23900, offline: 38000 },
-  { name: 'Jul', online: 34900, offline: 43000 },
-];
-
 const timeFilters = [
   { id: 1, name: "Day" },
   { id: 2, name: "Month" },
   { id: 3, name: "Quarter" },
   { id: 4, name: "Year" },
 ];
+
+const branchFilters = [
+  { id: 1, name: "CN000001 - Chi nhánh AEON MALL Tân Phú" },
+  { id: 2, name: "CN000002 - Chi Nhánh GigaMall Thủ Đức" },
+  { id: 3, name: "CN000003 - Chi nhánh Crescent Mall" },
+  { id: 4, name: "CN000004 - Chi nhánh Saigon Centre" },
+  { id: 5, name: "CN000005 - Chi nhánh Nowzone" },
+  { id: 6, name: "CN000006 - Chi nhánh Times City" },
+  { id: 7, name: "CN000007 - Chi nhánh Royal City" },
+  { id: 8, name: "CN000008 - Chi nhánh Vincom Bắc Từ Liêm" },
+  { id: 9, name: "CN000009 - Chi nhánh Vincom Plaza Skylake" },
+  { id: 10, name: "CN000010 - Chi nhánh Savico Megamall" },
+  { id: 11, name: "CN000011 - Chi nhánh Indochina Riverside Towers" },
+  { id: 12, name: "CN000012 - Chi nhánh GO! Đà Nẵng" },
+  { id: 13, name: "CN000013 - Chi nhánh Sense City Cần Thơ" },
+  { id: 14, name: "CN000014 - Chi nhánh Vincom Plaza Cần Thơ" },
+  { id: 15, name: "CN000015 - Chi nhánh Vincom Plaza Huế" },
+];
+
 
 export default function Home() {
   const revenueRef = useRef<HTMLDivElement>(null);
@@ -78,8 +77,10 @@ export default function Home() {
     }
   };
 
-  const [selected, setSelected] = useState(timeFilters[0]);
-  const [selectedEmployee, setSelectedEmployee] = useState("AEON");
+  // State riêng cho từng Listbox
+  const [revenueFilter, setRevenueFilter] = useState(timeFilters[0]); 
+  const [employeeFilter, setEmployeeFilter] = useState(timeFilters[0]);
+  const [selectedBranch, setSelectedBranch] = useState(branchFilters[0]);
 
   return (
     <div>
@@ -94,35 +95,103 @@ export default function Home() {
             priority
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-          <button className="home-btn-btn" onClick={scrollToRevenue}>Explore Data</button>
+            <button className="home-btn-btn" onClick={scrollToRevenue}>Explore Data</button>
           </div>
         </div>
 
-        <div ref={revenueRef}>
+        <div ref={revenueRef} className="revenue-section-wrapper">
+          <div className="revenue-section">
+            <h2 className="revenue-title">Revenue</h2>
+
+            {/* Listbox cho Revenue */}
+            <Listbox value={revenueFilter} onChange={setRevenueFilter}>
+              <div className="listbox-container">
+                <Listbox.Button className="listbox-button">
+                  {revenueFilter.name}
+                </Listbox.Button>
+                <Listbox.Options className="listbox-options">
+                  {timeFilters.map((time) => (
+                    <Listbox.Option
+                      key={time.id}
+                      className="listbox-option"
+                      value={time}>
+                      {time.name}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </div>
+            </Listbox>
+
+            <div className={"revenue-data"}>
+              <div className={"data-cards"}>
+                <div className={"data-card"}>
+                  <p>Orders</p>
+                  <p>$72,000</p>
+                  <p>↑ 23%</p>
+                  <div className={"bar-chart-small"}></div>
+                </div>
+                <div className={"data-card"}>
+                  <p>Delivery</p>
+                  <p>500</p>
+                  <p>↓ 6%</p>
+                  <div className={"bar-chart-small"}  style={{backgroundColor: '#34d399'}}></div>
+                </div>
+                <div className={"data-card"}>
+                  <p>Total</p>
+                  <p>100</p>
+                  <p>↓ 9%</p>
+                  <div className={"bar-chart-small"}  style={{backgroundColor: '#f59e0b'}}></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="employees-section">
             <h2 className="employees-title">Employees</h2>
             <div className="employees-table-wrapper">
               <div className="employees-table-action">
-                <div className="employees-time-filter">
-                  <button>Day</button>
-                  <button>Month</button>
-                  <button>Quarter</button>
-                  <button>Year</button>
-                </div>
+                {/* Listbox cho Employees */}
+                <Listbox value={employeeFilter} onChange={setEmployeeFilter}>
+                  <div className="listbox-container">
+                    <Listbox.Button className="listbox-button">
+                      {employeeFilter.name}
+                    </Listbox.Button>
+                    <Listbox.Options className="listbox-options">
+                      {timeFilters.map((time) => (
+                        <Listbox.Option
+                          key={time.id}
+                          className="listbox-option"
+                          value={time}>
+                          {time.name}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </div>
+                </Listbox>
+
                 <input
                   placeholder="Find employee"
                   className="employees-search"
                 />
-                <select
-                  className="employees-dropdown"
-                  value={selectedEmployee}
-                  onChange={(e) => setSelectedEmployee(e.target.value)}
-                >
-                  <option value="AEON">Chi nhánh AEON</option>
-                  <option value="SAIGON">Chi nhánh Sài Gòn</option>
-                  <option value="VINCOM">Chi nhánh Vincom</option>
-                </select>
+                
+                {/* Listbox cho Chi nhánh */}
+                <Listbox value={selectedBranch} onChange={setSelectedBranch}>
+                  <div className="listbox-container">
+                    <Listbox.Button className="listbox-button">
+                      {selectedBranch.name}
+                    </Listbox.Button>
+                    <Listbox.Options className="listbox-options">
+                      {branchFilters.map((branch) => (
+                        <Listbox.Option
+                          key={branch.id}
+                          className="listbox-option"
+                          value={branch}>
+                          {branch.name}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </div>
+                </Listbox>
               </div>
               <div className="employees-table">
                 <table>
