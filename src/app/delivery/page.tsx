@@ -9,79 +9,127 @@ import "@/styles/home.css";
 import "@/styles/delivery.css";
 
 const tabs = [
-  { id: "home", label: "Home", path: "/" },
-  { id: "menu", label: "Menu", path: "/menu" },
-  { id: "booking", label: "Booking", path: "/booking" },
-  { id: "delivery", label: "Delivery", path: "/delivery" },
-  { id: "about", label: "About", path: "/about" },
+    { id: "home", label: "Home", path: "/" },
+    { id: "menu", label: "Menu", path: "/menu" },
+    { id: "booking", label: "Booking", path: "/booking" },
+    { id: "delivery", label: "Delivery", path: "/delivery" },
+    { id: "about", label: "About", path: "/about" },
 ];
 
 const deliveryLinks = [
-  { id: "appetizer", label: "Appetizer", path: "/delivery" },
-  { id: "sushi", label: "Sushi", path: "/delivery/sushi" },
-  { id: "nigiri", label: "Nigiri", path: "/delivery/nigiri" },
-  { id: "sashimi", label: "Sashimi", path: "/delivery/sashimi" },
-  { id: "gunkan", label: "Gunkan", path: "/delivery/gunkan" },
-  { id: "yakimono", label: "Yakimono", path: "/delivery/yakimono" },
-  { id: "nabemono", label: "Nabemono", path: "/delivery/nabemono" },
-  { id: "lunchbox", label: "Lunch Box", path: "/delivery/lunchbox" },
-  { id: "desserts", label: "Desserts", path: "/delivery/desserts" },
-  { id: "drink", label: "Drink", path: "/delivery/drink" },
+    { id: "appetizer", label: "Appetizer" },
+    { id: "sushi", label: "Sushi" },
+    { id: "nigiri", label: "Nigiri" },
+    { id: "sashimi", label: "Sashimi" },
+    { id: "gunkan", label: "Gunkan" },
+    { id: "yakimono", label: "Yakimono" },
+    { id: "nabemono", label: "Nabemono" },
+    { id: "lunchbox", label: "Lunch Box" },
+    { id: "desserts", label: "Desserts" },
+    { id: "drink", label: "Drink" },
 ];
 
-const deliveryItems = [
-  { title: "Fish and Veggie", price: 120000 },
-  { title: "Tofu Chili", price: 160000 },
-  { title: "Egg and Cucumber", price: 100000 },
-  { title: "Fish and Veggie", price: 345000 },
-  { title: "Tofu Chili", price: 135000 },
-  { title: "Egg and Cucumber", price: 45000 },
-  { title: "Fish and Veggie", price: 90000 },
-  { title: "Tofu Chili", price: 180000 },
-  { title: "Fish and Veggie", price: 80000 },
-];
+const menuItems = {
+    appetizer: [
+        { title: "Fish and Veggie", price: 120000 },
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+        { title: "Tofu Chili", price: 135000 },
+        { title: "Egg and Cucumber", price: 45000 },
+        { title: "Fish and Veggie", price: 90000 },
+        { title: "Tofu Chili", price: 180000 },
+        { title: "Fish and Veggie", price: 80000 },
+    ],
+    sushi: [
+        { title: "Fish and Veggie", price: 120000 },
+    ],
+    nigiri: [
+        { title: "Fish and Veggie", price: 120000 },
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 80000 },
+    ],
+    sashimi: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    gunkan: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    yakimono: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    nabemono: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    lunchbox: [
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    desserts: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+    ],
+    drink: [
+        { title: "Fish and Veggie", price: 345000 },
+    ]
+};
 
-interface deliveryItem {
+interface DeliveryItem {
   title: string;
   price: number;
 }
 
-interface CartItem extends deliveryItem {
+interface CartItem extends DeliveryItem {
     quantity: number
 }
+
+type CategoryKeys = keyof typeof menuItems;
 
 export default function DeliveryPage() {
   const pathname = usePathname();
   const [searchTerm, setSearchTerm] = useState("");
-    const [cart, setCart] = useState<CartItem[]>([]);
-  const [showOrderView, setShowOrderView] = useState(true); // Always show order view
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [showOrderView, setShowOrderView] = useState(true);
+  const [activeCategory, setActiveCategory] = useState<CategoryKeys>("appetizer");
 
-  const filtereddeliveryItems = deliveryItems.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  const itemsToRender = searchTerm ? filtereddeliveryItems : deliveryItems;
+  const filteredMenuItems = menuItems[activeCategory].filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  const itemsToRender = searchTerm ? filteredMenuItems : menuItems[activeCategory];
 
- const handleAddToCart = (item: deliveryItem) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((cartItem) => cartItem.title === item.title);
-      if (existingItem) {
-        return prevCart.map((cartItem) =>
-          cartItem.title === item.title ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
-        );
-      } else {
-        return [...prevCart, { ...item, quantity: 1 }];
-      }
-    });
-  };
-
-
-  const handleToggleOrderView = () => {
-    setShowOrderView(!showOrderView);
-  };
+  const handleAddToCart = (item: DeliveryItem) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.find((cartItem) => cartItem.title === item.title);
+            if (existingItem) {
+                return prevCart.map((cartItem) =>
+                    cartItem.title === item.title ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+                );
+            } else {
+                return [...prevCart, { ...item, quantity: 1 }];
+            }
+        });
+    };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
+
+    const handleCategoryClick = (id: string) => {
+          setActiveCategory(id as CategoryKeys);
+      };
 
   return (
     <div>
@@ -107,14 +155,13 @@ export default function DeliveryPage() {
           <div className="delivery-container">
             <div className="delivery-sidebar">
               <div className="delivery-categories">
-                {deliveryLinks.map((link) => (
+                  {deliveryLinks.map((link) => (
                   <div
                     key={link.id}
-                    className={`delivery-category ${
-                      pathname === link.path ? "delivery-active-category" : ""
-                    }`}
+                    onClick={() => handleCategoryClick(link.id)}
+                      className={`delivery-category ${activeCategory === link.id ? "delivery-active-category" : ""}`}
                   >
-                    <Link href={link.path}>{link.label}</Link>
+                    {link.label}
                   </div>
                 ))}
               </div>
