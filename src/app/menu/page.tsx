@@ -31,12 +31,12 @@ const menuLinks = [
 
 // Sample menu items data
 const menuItems = [
-    { title: "Fish and Veggie", price: 12 },
-    { title: "Tofu Chili", price: 12 },
-    { title: "Egg and Cucumber", price: 12 },
-    { title: "Fish and Veggie", price: 12 },
-    { title: "Tofu Chili", price: 12 },
-    { title: "Egg and Cucumber", price: 12 },
+    { title: "Fish and Veggie", price: 120000 },
+    { title: "Tofu Chili", price: 160000 },
+    { title: "Egg and Cucumber", price: 100000 },
+    { title: "Fish and Veggie", price: 345000 },
+    { title: "Tofu Chili", price: 120.000 },
+    { title: "Egg and Cucumber", price: 135.000 },
     { title: "Fish and Veggie", price: 12 },
     { title: "Tofu Chili", price: 12 },
     { title: "Fish and Veggie", price: 12 },
