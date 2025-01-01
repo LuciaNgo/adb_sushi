@@ -1,4 +1,4 @@
-.menu-container {
+.delivery-container {
   display: flex;
   padding: 2rem 4rem;
   gap: 2rem;
@@ -6,12 +6,12 @@
   position: relative;
 }
 
-.menu-sidebar {
+.delivery-sidebar {
   position: relative;
   min-width: 170px;
 }
 
-.menu-border {
+.delivery-border {
   position: absolute;
   top: 0;
   left: 0;
@@ -20,14 +20,14 @@
   pointer-events: none;
 }
 
-.menu-categories {
+.delivery-categories {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.menu-category {
+.delivery-category {
   font-size: 1rem;
   color: #374151;
   cursor: pointer;
@@ -41,34 +41,28 @@
   padding: 0.25rem;
 }
 
-.menu-category:hover {
+.delivery-category:hover {
   color: #4F46E5;
 }
 
-.active-category {
+.delivery-active-category {
   font-weight: bold;
 }
 
-.menu-grid {
+.delivery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  flex: 1;
-}
-
-.menu-grid.two-column-grid {
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 
-.menu-content {
-  flex: 1;
-  position: relative;
-   margin-right: 300px;  /* Added margin for the order view to be next to food items */
+.delivery-content {
+    flex: 1;
+    position: relative;
+     margin-right: 0;
 }
 
-
-.menu-item {
+.delivery-item {
   position: relative;
   padding: 1rem;
   border: 1px solid #EBEBEB;
@@ -78,117 +72,96 @@
   gap: 0.3rem;
 }
 
-.menu-item-image {
+.delivery-item-image {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 0.5rem;
 }
 
-.menu-item-price {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #ec9b30;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-}
-
-.menu-item-price-title {
+.delivery-item-price-title {
   font-weight: 500;
   font-size: 1rem;
   color: #ec9b30;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
 }
 
-.menu-item-title {
+.delivery-item-title {
   font-weight: 600;
   font-size: 1.125rem;
-  margin-bottom: 0;
+  margin-top: 0.75rem;
 }
 
-.menu-item-description {
+.delivery-item-description {
   color: #6B7280;
   font-size: 0.875rem;
 }
 
-.search-bar {
+.delivery-search-bar {
   margin-bottom: 20px;
 }
 
-.search-input {
-  width: 1000px;
+.delivery-search-input {
+  width: 568px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.order-view {
-position: absolute;
-top: 0;
-right: 0;
-width: 300px;
-height: 100%;
-background-color: #f9f9f9;
-  padding: 1rem;
-border: 1px solid #ebebeb;
-box-shadow: -2px 0px 5px rgba(0,0,0,0.1);
- overflow-y: auto;
-display: flex;
+.delivery-order-view {
+  display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #EBEBEB;
+  border-radius: 1rem;
+  width: 350px; /* Tăng chiều rộng */
+  margin-right: 0; /* Giảm căng lề phải */
+  margin-left: auto; /* Dịch phần tử sang phải */
 }
 
-.order-item {
+
+.delivery-order-item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
+}
 
-  }
-
-.order-item-info {
-display: flex;
+.delivery-order-item-info {
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
 }
-.order-total {
-padding: 1rem 0;
- font-size: 1.125rem;
-font-weight: 600;
+
+.delivery-order-total {
+  padding: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
-.order-button {
+
+.delivery-order-button {
   padding: 0.5rem 1rem;
   background-color: #EA6D27;
   color: white;
   border: none;
-   border-radius: 1rem;
+  border-radius: 1rem;
   cursor: pointer;
   margin-bottom: 1rem;
 }
 
-.order-view-button {
-  padding: 0.5rem 1rem;
-  background-color: transparent;
-  color: #4F46E5;
-  border: 1px solid #4F46E5;
-   border-radius: 1rem;
-  cursor: pointer;
-  align-self: flex-end;
-  margin-top: 1rem;
-  width: 150px;
-}
 
-.add-to-cart-button {
+.delivery-add-to-cart-button {
+  margin-top: 2rem;
   padding: 0.5rem 1rem;
-  background-color: rgb(91, 34, 34);
+  background-color: white;
   color: #4F46E5;
    border: 1px solid #4F46E5;
   border-radius: 0.5rem;
   cursor: pointer;
   margin-top: auto;
-    align-self: flex-start;
+  align-self: flex-start;
 }

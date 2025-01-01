@@ -37,7 +37,7 @@
   height: auto;/* Remove the height from the category */
    flex-shrink: 0;
   display: block; /* added display block to make content take the whole row */
-   padding: 0.5rem; /* Added padding */
+   padding: 0.25rem; /* Added padding */
 }
 
 .menu-category:hover {
@@ -111,7 +111,7 @@
 }
 
 .search-input {
-  width: 1000px;
+  width: 950px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
