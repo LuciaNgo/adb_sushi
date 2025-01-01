@@ -4,10 +4,32 @@ import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
 import { FoodCard } from "@/ui/food-card";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "@/styles/home.css";
 import "@/styles/menu.css";
-import { useRouter } from "next/navigation";
+
+export function Header() {
+  const router = useRouter();
+  return (
+    <div id="header">
+      <Image
+        className="header-logo"
+        src="/logoSuShiX.svg"
+        alt="Next.js logo"
+        width={180}
+        height={40}
+        priority
+      />
+      <Sidebar links={tabs}/>
+      <div>
+        <button className="header-btn" onClick={() => router.push("/signin")}>
+            Sign In
+        </button>
+      </div>
+    </div>
+);
+}
 
 const tabs = [
     { id: "home", label: "Home", path: "/" },
@@ -17,117 +39,147 @@ const tabs = [
     { id: "about", label: "About", path: "/about" },
 ];
 
-export function Header() {
-    const router = useRouter();
-    return (
-      <div id="header">
-        <Image
-          className="header-logo"
-          src="/logoSuShiX.svg"
-          alt="Next.js logo"
-          width={180}
-          height={40}
-          priority
-        />
-        <Sidebar links={tabs}/>
-        <div>
-          <button className="header-btn" onClick={() => router.push("/signin")}>
-              Sign In
-          </button>
-        </div>
-      </div>
-  );
-  }
-
-
-
 const menuLinks = [
-    { id: "appetizer", label: "Appetizer", path: "/menu" },
-    { id: "sushi", label: "Sushi", path: "/menu/sushi" },
-    { id: "nigiri", label: "Nigiri", path: "/menu/nigiri" },
-    { id: "sashimi", label: "Sashimi", path: "/menu/sashimi" },
-    { id: "gunkan", label: "Gunkan", path: "/menu/gunkan" },
-    { id: "yakimono", label: "Yakimono", path: "/menu/yakimono" },
-    { id: "nabemono", label: "Nabemono", path: "/menu/nabemono" },
-    { id: "lunchbox", label: "Lunch Box", path: "/menu/lunchbox" },
-    { id: "desserts", label: "Desserts", path: "/menu/desserts" },
-    { id: "drink", label: "Drink", path: "/menu/drink" },
+    { id: "appetizer", label: "Appetizer"},
+    { id: "sushi", label: "Sushi"},
+    { id: "nigiri", label: "Nigiri"},
+    { id: "sashimi", label: "Sashimi"},
+    { id: "gunkan", label: "Gunkan"},
+    { id: "yakimono", label: "Yakimono"},
+    { id: "nabemono", label: "Nabemono"},
+    { id: "lunchbox", label: "Lunch Box"},
+    { id: "desserts", label: "Desserts"},
+    { id: "drink", label: "Drink"},
 ];
 
 // Sample menu items data
-const menuItems = [
-    { title: "Fish and Veggie", price: 120000 },
-    { title: "Tofu Chili", price: 160000 },
-    { title: "Egg and Cucumber", price: 100000 },
-    { title: "Fish and Veggie", price: 345000 },
-    { title: "Tofu Chili", price: 135000 },
-    { title: "Egg and Cucumber", price: 45000 },
-    { title: "Fish and Veggie", price: 90000 },
-    { title: "Tofu Chili", price: 180000 },
-    { title: "Fish and Veggie", price: 80000 },
-];
-
-export const theme = {
-    selectionColor: "transparent",
-    hoverBgColor: "transparent",
-    color: "inherit",
-    backgroundColor: "transparent",
+const menuItems = {
+    appetizer: [
+        { title: "Fish and Veggie", price: 120000 },
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+        { title: "Tofu Chili", price: 135000 },
+        { title: "Egg and Cucumber", price: 45000 },
+        { title: "Fish and Veggie", price: 90000 },
+        { title: "Tofu Chili", price: 180000 },
+        { title: "Fish and Veggie", price: 80000 },
+    ],
+    sushi: [
+        { title: "Fish and Veggie", price: 120000 },
+    ],
+    nigiri: [
+        { title: "Fish and Veggie", price: 120000 },
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 80000 },
+    ],
+    sashimi: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    gunkan: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    yakimono: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    nabemono: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    lunchbox: [
+        { title: "Egg and Cucumber", price: 100000 },
+        { title: "Fish and Veggie", price: 345000 },
+    ],
+    desserts: [
+        { title: "Tofu Chili", price: 160000 },
+        { title: "Egg and Cucumber", price: 100000 },
+    ],
+    drink: [
+        { title: "Fish and Veggie", price: 345000 },
+    ]
 };
+
+interface menuItem {
+  title: string;
+  price: number;
+  category: string;
+}
+
+type CategoryKeys = keyof typeof menuItems;
 
 export default function MenuPage() {
     const pathname = usePathname();
     const [searchTerm, setSearchTerm] = useState("");
+    const [activeCategory, setActiveCategory] = useState<CategoryKeys>("appetizer"); // Default category
 
-    const filteredMenuItems = menuItems.filter((item) =>
+    const filteredMenuItems = menuItems[activeCategory].filter((item) =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    const itemsToRender = searchTerm ? filteredMenuItems : menuItems;
+    const itemsToRender = searchTerm ? filteredMenuItems : menuItems[activeCategory];
 
-    return (
-        <div>
-            <Header/>
 
-            <main className="flex-1">
-                <div className="home-contentGroup home-contentGroup1">
-                    <div className="menu-container">
-                         <div className="menu-sidebar">
-                            <div className="menu-categories">
-                                {menuLinks.map((link) => (
-                                     <div
-                                         key={link.id}
-                                         className={`menu-category ${
-                                             pathname === link.path ? "active-category" : ""
-                                         }`}
-                                     >
-                                         <Link href={link.path}>{link.label}</Link>
-                                     </div>
-                                ))}
-                            </div>
-                        </div>
+    const handleCategoryClick = (id: string) => {
+          setActiveCategory(id as CategoryKeys);
+      };
 
-                        <div className="menu-content">
-                            <div className="search-bar">
-                                <input
-                                    type="text"
-                                    placeholder="Search dishes..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="search-input"
-                                />
-                            </div>
-                                  {itemsToRender.length > 0 ?
-                                      (
-                                          <div className="menu-grid">
-                                            {itemsToRender.map((item, index) => (
-                                                  <FoodCard key={index} {...item} />
-                                            ))}
-                                         </div>
-                                      ) : (<div className="menu-grid">No item found</div>)
-                                    }
-                        </div>
-                    </div>
-                </div>
-            </main>
+  return (
+    <div>
+        <Header/>
+
+      <main className="flex-1">
+        <div className="home-contentGroup home-contentGroup1">
+          <div className="menu-container">
+            <div className="menu-sidebar">
+              <div className="menu-categories">
+                {menuLinks.map((link) => (
+                     <div
+                         key={link.id}
+                         onClick={() => handleCategoryClick(link.id)}
+                         className={`menu-category ${activeCategory === link.id ? "menu-active-category" : ""}`}
+                   >
+                    {link.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="menu-content"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <div className="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search dishes..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="search-input"
+                />
+              </div>
+                <div className="menu-grid">
+                    {itemsToRender.map((item, index) => (
+                       <FoodCard
+                          key={index}
+                         {...item}
+                     />
+                  ))}
+                 </div>
+            </div>
+          </div>
         </div>
-    );
+      </main>
+    </div>
+  );
 }

@@ -20,6 +20,16 @@ body {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
+.home-btn-btn {
+    padding: 1rem 1rem;
+    background-color: #636AE8;
+    color: white;
+    border: none;
+    border-radius: 0rem;
+    cursor: pointer;
+    margin-top: 17.5rem;
+}
+
 .home-btn + .home-btn {
     margin-left: 20px;
 }
@@ -109,8 +119,8 @@ body {
 }
 
 .nav {
-    margin-left: auto; /* Pushes the navigation to the right */
-    margin-right: 2rem; /* Added some right margin to space it from the auth buttons */
+    margin-left: auto;
+    margin-right: 2rem;
 }
 
 .nav a {
@@ -119,7 +129,11 @@ body {
     color: #333;
     font-size: 16px;
 }
+.revenue-section-wrapper {
+  padding: 0 2rem;
+}
 .revenue-section {
+    margin-top: -5rem;
     padding: 2rem 4rem;
 }
 .revenue-title {
@@ -157,6 +171,7 @@ body {
 
 .employees-section {
     padding: 2rem 4rem;
+    margin-top: 2rem;
 }
 .employees-title {
     font-size: 2rem;
@@ -211,4 +226,18 @@ body {
 }
 .employees-table th {
     font-weight: bold;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.statistics-content {
+  flex: 1;
 }

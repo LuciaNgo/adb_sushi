@@ -44,15 +44,14 @@
   color: #4F46E5;
 }
 
-.active-category {
- font-weight: bold;
+.menu-active-category {
+  font-weight: bold; /* Added for active category*/
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  flex: 1;
 }
 
 .menu-content {
