@@ -36,11 +36,18 @@ export function Header() {
   );
 }
 
+const revenueData = [
+    { id: "HĐ000001", phone: "0937432754", date: "11-12-2004", total: 325000, branch: "CN00002" },
+    { id: "HĐ000002", phone: "0822394853", date: "11-12-2004", total: 1500000, branch: "CN00002" },
+    { id: "HĐ000003", phone: "0782938274", date: "23-12-2024", total: 560000, branch: "CN00002" },
+    { id: "HĐ000004", phone: "0897482848", date: "27-12-2024", total: 800000, branch: "CN00002" },
+  ];
+
 const employeeData = [
-  { id: "NV000001", employeeName: "John Lee", diemphucvu: "10", role: "Cook", chinhanh: "CN00002" },
-  { id: "NV000002", employeeName: "Richard Zhao", diemphucvu: "9", role: "Security", chinhanh: "CN00004" },
-  { id: "NV000003", employeeName: "Lady Gaga", diemphucvu: "4.5", role: "Sale", chinhanh: "CN00003" },
-  { id: "NV000004", employeeName: "Mickey Mouse", diemphucvu: "7.8", role: "Service", chinhanh: "CN00005" },
+  { id: "NV000001", employeeName: "John Lee", point: "10", role: "Cook", branch: "CN00002" },
+  { id: "NV000002", employeeName: "Richard Zhao", point: "9", role: "Security", branch: "CN00004" },
+  { id: "NV000003", employeeName: "Lady Gaga", point: "4.5", role: "Sale", branch: "CN00003" },
+  { id: "NV000004", employeeName: "Mickey Mouse", point: "7.8", role: "Service", branch: "CN00005" },
 ];
 
 const timeFilters = [
@@ -68,6 +75,9 @@ const branchFilters = [
   { id: 15, name: "CN000015 - Chi nhánh Vincom Plaza Huế" },
 ];
 
+function formatPrice(price: number): string {
+    return new Intl.NumberFormat("vi-VN").format(price);
+  }
 
 export default function Home() {
   const revenueRef = useRef<HTMLDivElement>(null);
@@ -146,6 +156,34 @@ export default function Home() {
             </div>
           </div>
 
+             <div className="revenue-table-wrapper">
+             <div className="revenue-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Invoice ID</th>
+                      <th>Customer Phone</th>
+                      <th>Payment Date</th>
+                      <th>Total Cost</th>
+                      <th>Branch</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {revenueData.map((invoice) => (
+                      <tr key={invoice.id}>
+                        <td>{invoice.id}</td>
+                        <td>{invoice.phone}</td>
+                        <td>{invoice.date}</td>
+                        <td>{invoice.total}</td>
+                        <td>{invoice.branch}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+             </div>
+
+
           <div className="employees-section">
             <h2 className="employees-title">Employees</h2>
             <div className="employees-table-wrapper">
@@ -170,8 +208,13 @@ export default function Home() {
                 </Listbox>
 
                 <input
-                  placeholder="Find employee"
-                  className="employees-search"
+                  placeholder="Search ID"
+                  className="employees-search-id"
+                  
+                />
+                <input
+                  placeholder="Search employee name"
+                  className="employees-search-name"
                 />
                 
                 {/* Listbox cho Chi nhánh */}
@@ -197,11 +240,11 @@ export default function Home() {
                 <table>
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Employee ID</th>
                       <th>Employee Name</th>
-                      <th>Điểm phục vụ</th>
+                      <th>Service Point</th>
                       <th>Role</th>
-                      <th>Chi nhánh</th>
+                      <th>Branch</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -209,9 +252,9 @@ export default function Home() {
                       <tr key={employee.id}>
                         <td>{employee.id}</td>
                         <td>{employee.employeeName}</td>
-                        <td>{employee.diemphucvu}</td>
+                        <td>{employee.point}</td>
                         <td>{employee.role}</td>
-                        <td>{employee.chinhanh}</td>
+                        <td>{employee.branch}</td>
                       </tr>
                     ))}
                   </tbody>

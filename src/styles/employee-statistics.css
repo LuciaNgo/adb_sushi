@@ -190,6 +190,31 @@ body {
     margin-left: 2rem;
 }
 
+.revenue-table {
+    width: 1180px;
+    overflow-x: auto;
+    border: 1px solid #ebebeb;
+    border-radius: 0.5rem;
+    margin-left: 6rem;
+    margin-top: 0rem;
+}
+
+.revenue-table table {
+    width: 1179px;
+    height: 50px;
+    border-collapse: collapse;
+}
+.revenue-table th,
+.revenue-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ebebeb;
+}
+.revenue-table th {
+    font-weight: bold;
+}
+
+
 .data-cards {
     display: flex;
     gap: 1rem;
@@ -239,32 +264,45 @@ body {
   border: 1px solid #ebebeb;
    cursor: pointer;
 }
-.employees-search {
+.employees-search-id {
+    margin-top: -2rem;
+    width: 150px;
     padding: 0.5rem;
     border: 1px solid #ebebeb;
+    border-radius: 0.5rem;
+}
+
+.employees-search-name {
+    margin-top: -2rem;
+    width: 250px;
+    padding: 0.5rem;
+    border: 1px solid #ebebeb;
+    border-radius: 0.5rem;
 }
 .employees-dropdown {
-  padding: 0.5rem;
+    padding: 0.5rem;
     border: 1px solid #ebebeb;
     border-radius: 0.25rem;
     cursor: pointer;
 }
 
 .employees-table {
-  overflow-x: auto;
-  border: 1px solid #ebebeb;
+    overflow-x: auto;
+    border: 1px solid #ebebeb;
     border-radius: 0.5rem;
+    margin-left: 2rem;
+    margin-top: -2rem;
 }
 
 .employees-table table {
- width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 .employees-table th,
- .employees-table td {
-      padding: 0.75rem;
+.employees-table td {
+    padding: 0.75rem;
     text-align: left;
-     border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
 }
 .employees-table th {
     font-weight: bold;
@@ -282,4 +320,4 @@ body {
 }
 .statistics-content {
   flex: 1;
-}
+}  
