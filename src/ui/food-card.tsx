@@ -15,7 +15,7 @@ export function FoodCard({ title, price }: MenuCardProps) {
   const imagePath = `/${title.toLowerCase().replace(/\s+/g, "_")}.svg`;
 
   return (
-    <div className="menu-item">
+    <div className="menu-item flex flex-col items-center justify-center">
       <Image
         src={imagePath}
         alt={title}
@@ -23,8 +23,8 @@ export function FoodCard({ title, price }: MenuCardProps) {
         height={180}
         className="rounded-full object-cover"
       />
-      <h3 className="menu-item-title text-center">{title}</h3>
-      <div className="menu-item-price-title text-center">{formatPrice(price)} VND</div>
+      <h3 className="menu-item-title">{title}</h3>
+      <div className="menu-item-price-title">{formatPrice(price)} VND</div>
     </div>
   );
 }
