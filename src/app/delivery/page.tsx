@@ -4,8 +4,7 @@ import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
 import { FoodCardDelivery } from "@/ui/food-card-delivery";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
-import "@/styles/home.css";
+import "@/styles/booking.css";
 import "@/styles/delivery.css";
 
 const tabs = [
@@ -87,6 +86,148 @@ const menuItems = {
     ]
 };
 
+export function Form() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    deliveryDate: "",
+    deliveryTime: "",
+    deliveryAddress: "",
+    deliveryPhone: "",
+    paymentMethod: "",
+    deliverySpecialRequest: ""
+  });
+
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Ngăn reload trang
+
+    const form = e.currentTarget;
+
+    // Kiểm tra tính hợp lệ của form
+    if (!form.checkValidity()) {
+      form.reportValidity(); // Hiển thị các lỗi built-in của trình duyệt
+      return;
+    }
+
+    console.log("Form submitted:", formData);
+
+    // Chuyển hướng đến trang "/"
+    alert("Your delivery order has been record!");
+    router.push("/");
+  };
+
+  return (
+    <form className="booking-form delivery-form" onSubmit={handleSubmit}>
+      <div className="booking-form-row">
+        <div className="booking-form-group">
+          <label htmlFor="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            className="booking-form-group-input"
+            value={formData.fullName}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="booking-form-group">
+          <label htmlFor="deliveryDate">Delivery Date</label>
+          <input
+            type="date"
+            id="deliveryDate"
+            name="deliveryDate"
+            className="booking-form-group-input"
+            value={formData.deliveryDate}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="booking-form-group">
+          <label htmlFor="deliveryTime">Delivery Time</label>
+          <input
+            type="time"
+            id="deliveryTime"
+            name="deliveryTime"
+            className="booking-form-group-input"
+            value={formData.deliveryTime}
+            required
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="booking-form-row">
+      <div className="booking-form-group">
+          <label htmlFor="deliveryPhone">Phone Number</label>
+          <input
+            type="text"
+            id="deliveryPhone"
+            name="deliveryPhone"
+            className="booking-form-group-input"
+            value={formData.deliveryPhone}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="booking-form-group">
+          <label htmlFor="deliveryAddress">Address</label>
+          <input
+            type="text"
+            id="deliveryAddress"
+            name="deliveryAddress"
+            className="booking-form-group-input"
+            value={formData.deliveryAddress}
+            required
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="booking-form-row">
+        <div className="booking-form-group">
+          <label htmlFor="paymentMethod">Payment Method</label>
+          <input
+            type="text"
+            id="paymentMethod"
+            name="paymentMethod"
+            className="booking-form-group-input"
+            value={formData.paymentMethod}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div id="booking-request" className="booking-form-group">
+          <label htmlFor="deliverySpecialRequest">Special requests</label>
+          <textarea
+            id="specialRequest"
+            name="deliverySpecialRequest"
+            className="booking-form-group-input"
+            value={formData.deliverySpecialRequest}
+            onChange={handleChangeTextarea}
+          ></textarea>
+        </div>
+      </div>
+      <button className="booking-form-btn" type="submit">Order</button>
+    </form>
+  );
+}
+
 export function Header() {
   const router = useRouter();
   return (
@@ -149,15 +290,40 @@ export default function DeliveryPage() {
       return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
-    const handleCategoryClick = (id: string) => {
-          setActiveCategory(id as CategoryKeys);
-      };
+  const handleCategoryClick = (id: string) => {
+        setActiveCategory(id as CategoryKeys);
+    };
+
+  const handleGoToInfo = (id: string) => {
+    const btn = document.getElementById(id);
+    if (!btn) {
+      return;
+    }
+  
+    if (calculateTotal() <= 0) {
+      alert("No dish in the order!");
+    }
+    else {
+      const deliveryMenu = document.getElementById("deliveryMenu");
+      if (deliveryMenu) {
+        deliveryMenu.setAttribute("hidden", "");
+        const deliveryInfo = document.getElementById("deliveryInfo");
+        if (deliveryInfo) {
+          deliveryInfo.removeAttribute("hidden");
+        }
+      }
+    }
+  };
 
   return (
     <div>
       <Header/>
-
-      <main className="flex-1">
+      <div id="deliveryInfo" hidden>
+        <div className="booking-content-title">Delivery Information</div>
+        <Form/>
+      </div>
+      
+      <main id="deliveryMenu" className="flex-1">
         <div className="home-contentGroup home-contentGroup1">
           <div className="delivery-container">
             <div className="delivery-sidebar">
@@ -226,7 +392,7 @@ export default function DeliveryPage() {
                  <div className="delivery-order-total">
                         Total Amount: {calculateTotal().toLocaleString()} VND
                     </div>
-                     <button className="delivery-order-button">Order</button>
+                     <button id="delivery-order-btn" className="delivery-order-button" onClick={() => handleGoToInfo("delivery-order-btn")}>Order</button>
                 </div>
           </div>
         </div>
