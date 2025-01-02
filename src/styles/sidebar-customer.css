@@ -1,0 +1,38 @@
+/* styles/sidebar-customer.css */
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+   }
+   
+   .sidebar-customer {
+        background-color: #1f2937;
+        color: white;
+        display: flex;
+        align-items: center;
+         justify-content: space-between;
+     }
+   
+     .sidebar-customer .nav-item {
+          padding: 10px;
+       
+     }
+   
+     #sidebar-customer{
+         width: 700px;
+          height: 44px;
+          justify-self: center;
+         align-items: center;
+        font-size: 1.25rem;
+    }
+   
+     #sidebar-customer-info{
+         display: flex;
+         flex-direction: column;
+         align-items: end;
+    }
+    
+    .sidebar-customer-info-and-logout{
+      display: flex;
+        align-items: center;
+      }
