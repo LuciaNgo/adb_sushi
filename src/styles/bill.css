@@ -1,0 +1,74 @@
+.right-section {
+    /* display: flex;
+    justify-content: flex-end; 
+    align-items: center;       */
+    margin-left: 48rem;
+  }
+
+.title {
+    font-size: 3rem;
+    color: #ec9b30;
+    margin-left: 10rem;
+    font-weight: bold;
+}
+
+.listbox-wrapper {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 1rem; /* Add spacing between elements */
+  }
+  
+
+.listbox-button {
+  background-color: #5a4cff; /* Match the color */
+  color: white; /* White text */
+  padding: 0.5rem 1rem; /* Add padding */
+  border: none; /* Remove border */
+  border-radius: 0.5rem; /* Rounded corners */
+  font-size: 1rem; /* Adjust font size */
+  font-weight: 500; /* Slightly bold text */
+  cursor: pointer; /* Add pointer cursor */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.listbox-button:hover {
+  background-color: #483ac8; /* Slightly darker on hover */
+}
+
+.date-picker-container {
+  font-size: 1.5rem;
+  display: flex; /* Horizontal layout */
+  align-items: center; /* Align the label and input vertically */
+  gap: 1rem;
+  margin-left: 10rem;
+}
+
+.date-picker {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.date-picker:focus {
+  border-color: #5a4cff; /* Match the color of the buttons */
+  box-shadow: 0 0 5px rgba(90, 76, 255, 0.5);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  text-align: center;
+}

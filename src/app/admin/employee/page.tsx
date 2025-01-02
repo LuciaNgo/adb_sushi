@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 
 const tabs = [
   { id: "home", label: "Home", path: "/" },
-  { id: "menu", label: "Menu", path: "/menu" },
-  { id: "booking", label: "Booking", path: "/booking" },
+  { id: "customer_order", label: "Customer Order", path: "/customerOrder" },
+  { id: "bill", label: "Bill", path: "/bill" },
   { id: "delivery", label: "Delivery", path: "/delivery" },
   { id: "about", label: "About", path: "/admin/employee" },
 ];
