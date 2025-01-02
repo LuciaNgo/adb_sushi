@@ -4,13 +4,13 @@ import "@/styles/booking.css";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Sidebar } from "@/ui/sidebar";
+import { SidebarCustomer} from "@/ui/sidebar-customer";
 
 const tabs = [
     { id: "home", label: "Home", path: "/" },
     { id: "menu", label: "Menu", path: "/menu" },
     { id: "booking", label: "Booking", path: "/booking" },
     { id: "delivery", label: "Delivery", path: "/delivery" },
-    { id: "about", label: "About", path: "/about" },
 ];
 
 interface UserInfo {
@@ -19,6 +19,15 @@ interface UserInfo {
     SDTKHACHHANG: string;
     MATAIKHOAN: string;
 }
+interface EmployeeInfo {
+  MANHANVIEN: string;
+  HOTEN: string;
+  MABOPHAN: string;
+  Role: string;
+}
+
+
+type UserOrEmployee = UserInfo | EmployeeInfo;
 
 interface Branch {
     id: string;
@@ -54,16 +63,16 @@ export function Form() {
         specialRequest: ""
     });
     const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-    const [isCustomerLoggedIn, setIsCustomerLoggedIn] = useState(false);
-  const [error, setError] = useState<string | null>(null);
- const [isLoading, setIsLoading] = useState(false);
+   const [isCustomerLoggedIn, setIsCustomerLoggedIn] = useState(false);
+   const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const storedUser = localStorage.getItem('userInfo');
         if (storedUser) {
             setUserInfo(JSON.parse(storedUser));
             setIsCustomerLoggedIn(true);
-        } else {
-            setIsCustomerLoggedIn(false);
+        }else{
+          setIsCustomerLoggedIn(false);
         }
     }, []);
 
@@ -93,49 +102,39 @@ export function Form() {
     };
 
      const router = useRouter();
-     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       const form = e.currentTarget;
       if (!form.checkValidity()) {
           e.preventDefault();
-          return;
-      }
-      
+           return;
+        }
       e.preventDefault();
       setError(null);
-     setIsLoading(true);
-  
-     try{
-        const response = await fetch("/api/booking", {
-             method: "POST",
-             headers: {
-                 "Content-Type": "application/json",
-             },
-               body: JSON.stringify(formData),
-         });
-         if (!response.ok) {
-             const errorData = await response.json();
-              setError(errorData.error || "Booking failed");
-            return;
-         }
-  
-       const bookingContent = document.getElementById("booking-content");
-         if (bookingContent) {
-           bookingContent.setAttribute("hidden", "");
-             const bookingOrder = document.getElementById("booking-order");
-             if (bookingOrder) {
-                  bookingOrder.removeAttribute("hidden");
-              }
-        }
+      setIsLoading(true);
+   
+       try{
+           const response = await fetch("/api/booking", {
+                method: "POST",
+                headers: {
+                   "Content-Type": "application/json",
+                 },
+                  body: JSON.stringify(formData),
+             });
+             if (!response.ok) {
+                 const errorData = await response.json();
+                  setError(errorData.error || "Booking failed");
+                return;
+            }
+             router.push("/order")
   
   
-   } catch (error) {
-         console.error("Error signing in:", error);
-        setError("An unexpected error occurred.");
-      } finally {
-        setIsLoading(false)
+      } catch (error) {
+           console.error("Error signing in:", error);
+            setError("An unexpected error occurred.");
+        } finally {
+             setIsLoading(false)
        }
-  
-  };
+ };
 
 
     return (
@@ -180,10 +179,10 @@ export function Form() {
                         className="booking-form-group-input"
                         value={formData.arrivalTime}
                         required
-                        onChange={(e) => {
-                          const timeValue = e.target.value;
-                          // Lưu giá trị với định dạng HH:mm:00
-                          setFormData({ ...formData, arrivalTime: `${timeValue}:00` });
+                       onChange={(e) => {
+                           const timeValue = e.target.value;
+                           // Lưu giá trị với định dạng HH:mm:00
+                            setFormData({ ...formData, arrivalTime: `${timeValue}:00` });
                       }}
                     />
                 </div>
@@ -192,7 +191,7 @@ export function Form() {
             <div className="booking-form-row">
                 <div className="booking-form-group">
                     <label htmlFor="phone">Phone Number</label>
-                    <input
+                   <input
                         type="text"
                         id="phone"
                         name="phone"
@@ -209,10 +208,10 @@ export function Form() {
                        type="text"
                         id="fullName"
                         name="fullName"
-                        className="booking-form-group-input"
+                       className="booking-form-group-input"
                         value={formData.fullName}
                         required
-                         onChange={handleChange}
+                        onChange={handleChange}
                         disabled={isCustomerLoggedIn}
                      />
                 </div>
@@ -271,41 +270,66 @@ export function Form() {
                 </div>
            </div>
          );
-    }
+  }
    
-   
-   export function Header() {
-     const router = useRouter();
-      return (
-        <div id="header">
-          <Image
-            className="header-logo"
-             src="/logoSuShiX.svg"
-             alt="Next.js logo"
-           width={180}
-            height={40}
-              priority
-          />
-           <Sidebar links={tabs}/>
-            <div>
-              <button className="header-btn" onClick={() => router.push("/signin")}>
-                Sign In
-              </button>
-             </div>
-        </div>
-     );
-    }
-   
-   export default function Home() {
-     return (
-         <div id="booking-page">
-             <Header/>
+
+export default function Home() {
+    const router = useRouter();
+     const [isLoggedIn, setIsLoggedIn] = useState(false);
+        const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+        const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo | null>(null);
+
+
+     useEffect(() => {
+        const storedUser = localStorage.getItem('userInfo');
+           if (storedUser) {
+              setIsLoggedIn(true);
+                setUserInfo(JSON.parse(storedUser));
+            }
+             const isEmployeeStored = localStorage.getItem('isEmployee');
+             if(isEmployeeStored) {
+                 setIsLoggedIn(true);
+                const employeeStored = localStorage.getItem('employeeInfo');
+                 if(employeeStored){
+                      setEmployeeInfo(JSON.parse(employeeStored));
+                   }
+             }
+       }, []);
+    return (
+        <div id="booking-page">
+           <div id="header" className="header">
+              <Image
+                className="header-logo"
+                  src="/logoSuShiX.svg"
+                  alt="Next.js logo"
+                 width={180}
+                  height={40}
+                  priority
+              />
+                <Sidebar links={tabs} />
+                {isLoggedIn ? (
+                    <>
+                    {userInfo && (
+                        <div style={{display: "flex", flexDirection: "column", alignItems: "end"}}>
+                            <p style={{margin: 0}}> {userInfo.HOTEN}</p>
+                        </div>
+                    )}
+                   <button className="header-btn" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
+                     Log Out
+                   </button>
+                </>
+                ) : (
+                  <button className="header-btn" onClick={() => router.push("/signin")}>
+                    Sign In
+                  </button>
+                )}
+            </div>
              <AskOrder/>
-             <div id="booking-content">
+           <div id="booking-content">
                 <div className="booking-content-title">Online reservation information</div>
-                <div>Please make a reservation at least 1 hour before your dining time.</div>
+                  <div>Please make a reservation at least 1 hour before your dining time.</div>
                  <Form/>
-           </div>
-         </div>
+            </div>
+       </div>
      );
    };

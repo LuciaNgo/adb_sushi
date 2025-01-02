@@ -10,7 +10,6 @@
 
 .sidebar .nav-item {
     padding: 10px;
-    
 }
 
 #sidebar {
@@ -18,5 +17,5 @@
     height: 44px;
     justify-self: center;
     align-items: center;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
 }

@@ -18,7 +18,6 @@ const tabs = [
     { id: "menu", label: "Menu", path: "/menu" },
     { id: "booking", label: "Booking", path: "/booking" },
     { id: "delivery", label: "Delivery", path: "/delivery" },
-    { id: "about", label: "About", path: "/admin/manager"},
 ];
 
 export function Header() {
@@ -45,26 +44,24 @@ export function Header() {
            priority
         />
 
-           <Sidebar links={tabs}/>
-
-       <div>
-       {isLoggedIn ? (
-                <>
+                <Sidebar links={tabs} />
+                {isLoggedIn ? (
+                    <>
                     {userInfo && (
                         <div style={{display: "flex", flexDirection: "column", alignItems: "end"}}>
                             <p style={{margin: 0}}> {userInfo.HOTEN}</p>
                         </div>
                     )}
-                   <button className="header-btn" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
+                   <button className="header-logout" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
                      Log Out
                    </button>
                 </>
-            ) : (
-                <button className="header-btn" onClick={() => router.push("/signin")}>
-                   Sign In
-                </button>
-            )}
-       </div>
+                ) : (
+                  <button className="header-btn" onClick={() => router.push("/signin")}>
+                    Sign In
+                  </button>
+                )}
+
      </div>
  );
 }

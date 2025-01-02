@@ -31,7 +31,7 @@ body {
 }
 
 .header-btn {
-  background-color: #000000;
+  background-color: #EA6D27;
   color: #fff;
   height: 50px;
   width: 120px;
@@ -42,6 +42,15 @@ body {
 .header-btn + .header-btn {
   margin-left: 20px;
   background-color: #EA6D27;
+}
+
+.header-logout {
+  background-color: #000000;
+  color: #fff;
+  height: 50px;
+  width: 120px;
+  border-radius: 20px 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header-logo {
