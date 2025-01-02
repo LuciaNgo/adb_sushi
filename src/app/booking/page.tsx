@@ -55,7 +55,8 @@ export function Form() {
     });
     const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
     const [isCustomerLoggedIn, setIsCustomerLoggedIn] = useState(false);
-
+  const [error, setError] = useState<string | null>(null);
+ const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const storedUser = localStorage.getItem('userInfo');
         if (storedUser) {
@@ -91,25 +92,51 @@ export function Form() {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        const form = e.currentTarget;
-        if (!form.checkValidity()) {
-            e.preventDefault();
+     const router = useRouter();
+     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      const form = e.currentTarget;
+      if (!form.checkValidity()) {
+          e.preventDefault();
+          return;
+      }
+      
+      e.preventDefault();
+      setError(null);
+     setIsLoading(true);
+  
+     try{
+        const response = await fetch("/api/booking", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+               body: JSON.stringify(formData),
+         });
+         if (!response.ok) {
+             const errorData = await response.json();
+              setError(errorData.error || "Booking failed");
             return;
+         }
+  
+       const bookingContent = document.getElementById("booking-content");
+         if (bookingContent) {
+           bookingContent.setAttribute("hidden", "");
+             const bookingOrder = document.getElementById("booking-order");
+             if (bookingOrder) {
+                  bookingOrder.removeAttribute("hidden");
+              }
         }
+  
+  
+   } catch (error) {
+         console.error("Error signing in:", error);
+        setError("An unexpected error occurred.");
+      } finally {
+        setIsLoading(false)
+       }
+  
+  };
 
-        e.preventDefault();
-        console.log("Form submitted:", formData);
-
-        const bookingContent = document.getElementById("booking-content");
-        if (bookingContent) {
-            bookingContent.setAttribute("hidden", "");
-            const bookingOrder = document.getElementById("booking-order");
-            if (bookingOrder) {
-                bookingOrder.removeAttribute("hidden");
-            }
-        }
-    };
 
     return (
         <form className="booking-form" onSubmit={handleSubmit}>
@@ -153,7 +180,11 @@ export function Form() {
                         className="booking-form-group-input"
                         value={formData.arrivalTime}
                         required
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          const timeValue = e.target.value;
+                          // Lưu giá trị với định dạng HH:mm:00
+                          setFormData({ ...formData, arrivalTime: `${timeValue}:00` });
+                      }}
                     />
                 </div>
             </div>
@@ -169,7 +200,7 @@ export function Form() {
                         value={formData.phone}
                         required
                         onChange={handleChange}
-                        disabled={isCustomerLoggedIn}
+                       disabled={isCustomerLoggedIn}
                     />
                 </div>
                 <div className="booking-form-group">
@@ -212,66 +243,69 @@ export function Form() {
                        ></textarea>
                 </div>
               </div>
-           <button className="booking-form-btn" type="submit">Booking</button>
+           {error && <p style={{color: 'red'}}>{error}</p>}
+           <button className="booking-form-btn" type="submit" disabled={isLoading}>
+                 {isLoading ? "Booking..." : "Booking"}
+              </button>
         </form>
-    );
-}
-
-export function AskOrder() {
-    const router = useRouter();
-    return (
-        <div id="booking-order" hidden>
-            <div className="booking-order-title">
-                Booking successfully
-            </div>
-            <div className="booking-order-title">
-                Would you like to order ahead?
-            </div>
-            <div className="booking-order-group">
-                <button className="booking-order-btn" onClick={() => router.push("/order")}>
-                    Yes
-                </button>
-                <button id="booking-order-no" className="booking-order-btn" onClick={() => router.push("/")}>
-                    No
-                </button>
-            </div>
-        </div>
-    );
-}
-
-
-export function Header() {
-    const router = useRouter();
-    return (
+     );
+   }
+   
+   export function AskOrder() {
+       const router = useRouter();
+        return (
+           <div id="booking-order" hidden>
+               <div className="booking-order-title">
+                 Booking successfully
+               </div>
+                <div className="booking-order-title">
+                    Would you like to order ahead?
+               </div>
+               <div className="booking-order-group">
+                  <button className="booking-order-btn" onClick={() => router.push("/order")}>
+                       Yes
+                    </button>
+                   <button id="booking-order-no" className="booking-order-btn" onClick={() => router.push("/")}>
+                      No
+                    </button>
+                </div>
+           </div>
+         );
+    }
+   
+   
+   export function Header() {
+     const router = useRouter();
+      return (
         <div id="header">
-            <Image
-                className="header-logo"
-                src="/logoSuShiX.svg"
-                alt="Next.js logo"
-                width={180}
-                height={40}
-                priority
-            />
-            <Sidebar links={tabs}/>
+          <Image
+            className="header-logo"
+             src="/logoSuShiX.svg"
+             alt="Next.js logo"
+           width={180}
+            height={40}
+              priority
+          />
+           <Sidebar links={tabs}/>
             <div>
-                <button className="header-btn" onClick={() => router.push("/signin")}>
-                    Sign In
-                </button>
-            </div>
+              <button className="header-btn" onClick={() => router.push("/signin")}>
+                Sign In
+              </button>
+             </div>
         </div>
-    );
-}
-
-export default function Home() {
-    return (
-        <div id="booking-page">
-            <Header/>
-            <AskOrder/>
-            <div id="booking-content">
+     );
+    }
+   
+   export default function Home() {
+     return (
+         <div id="booking-page">
+             <Header/>
+             <AskOrder/>
+             <div id="booking-content">
                 <div className="booking-content-title">Online reservation information</div>
                 <div>Please make a reservation at least 1 hour before your dining time.</div>
-                <Form/>
-            </div>
-        </div>
-    );
-};
+                 <Form/>
+           </div>
+         </div>
+     );
+   };

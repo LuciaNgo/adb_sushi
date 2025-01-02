@@ -94,6 +94,46 @@ app.post('/signin', async (req, res) => {
     }
 });
 
+app.post('/booking', async (req, res) => {
+    /** @type {BookingRequest} */
+    const { SDTKHACHHANG, NHAHANG, NGAYDEN, GIODEN, SOLUONGKHACH, GHICHU } = req.body;
+
+    console.log('Received booking request:', {
+        SDTKHACHHANG,
+        NHAHANG,
+        NGAYDEN,
+        GIODEN,
+        SOLUONGKHACH,
+        GHICHU
+    });
+
+    const pool = await connectToDatabase();
+    try {
+        const request = pool.request();
+        request.input('SDTKHACHHANG', sql.VarChar(10), SDTKHACHHANG);
+        request.input('NHAHANG', sql.Char(8), NHAHANG);
+        request.input('NGAYDEN', sql.Date, NGAYDEN);
+
+        // Parse the time string into a Date object for `sql.Time`
+        const [hours, minutes] = GIODEN.split(':').map(Number);
+        const timeForSQL = new Date();
+        timeForSQL.setHours(hours, minutes, 0);
+
+        request.input('GIODEN', sql.Time, timeForSQL);
+        request.input('SOLUONGKHACH', sql.Int, SOLUONGKHACH);
+        request.input('GHICHU', sql.NVarChar(50), GHICHU);
+
+        const result = await request.execute('sp_ThemPhieuDatBan');
+        console.log('Stored procedure result:', result);
+        res.json(result.recordset);
+    } catch (error) {
+        /** @type {CustomError} */
+        const customError = error;
+        res.status(500).json({ error: customError.message });
+        console.error(error);
+    }
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });
