@@ -314,7 +314,7 @@ export default function Home() {
                             <p style={{margin: 0}}> {userInfo.HOTEN}</p>
                         </div>
                     )}
-                   <button className="header-btn" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
+                   <button className="header-logout" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
                      Log Out
                    </button>
                 </>

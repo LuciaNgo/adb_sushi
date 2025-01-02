@@ -2,12 +2,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Sidebar } from '@/ui/sidebar';
-import { SidebarCustomer} from "@/ui/sidebar-customer";
 import { FoodCardDelivery } from "@/ui/food-card-delivery";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
 import "@/styles/home.css";
 import "@/styles/delivery.css";
+import "@/styles/booking.css";
 
 interface UserInfo {
     MAKHACHHANG: string;
@@ -44,6 +43,192 @@ const deliveryLinks = [
     { id: "desserts", label: "Desserts" },
     { id: "drink", label: "Drink" },
 ];
+
+export function Form() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    deliveryDate: "",
+    deliveryTime: "",
+    deliveryAddress: "",
+    deliveryPhone: "",
+    paymentMethod: "",
+    deliverySpecialRequest: ""
+  });
+
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Ngăn reload trang
+
+    const form = e.currentTarget;
+
+    // Kiểm tra tính hợp lệ của form
+    if (!form.checkValidity()) {
+      form.reportValidity(); // Hiển thị các lỗi built-in của trình duyệt
+      return;
+    }
+
+    console.log("Form submitted:", formData);
+
+    // Chuyển hướng đến trang "/"
+    alert("Your delivery order has been record!");
+    router.push("/order");
+  };
+
+  return (
+    <form className="booking-form delivery-form" onSubmit={handleSubmit}>
+      <div className="booking-form-row">
+        <div className="booking-form-group">
+          <label htmlFor="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            className="booking-form-group-input"
+            value={formData.fullName}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="booking-form-group">
+          <label htmlFor="deliveryDate">Delivery Date</label>
+          <input
+            type="date"
+            id="deliveryDate"
+            name="deliveryDate"
+            className="booking-form-group-input"
+            value={formData.deliveryDate}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="booking-form-group">
+          <label htmlFor="deliveryTime">Delivery Time</label>
+          <input
+            type="time"
+            id="deliveryTime"
+            name="deliveryTime"
+            className="booking-form-group-input"
+            value={formData.deliveryTime}
+            required
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="booking-form-row">
+      <div className="booking-form-group">
+          <label htmlFor="deliveryPhone">Phone Number</label>
+          <input
+            type="text"
+            id="deliveryPhone"
+            name="deliveryPhone"
+            className="booking-form-group-input"
+            value={formData.deliveryPhone}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="booking-form-group">
+          <label htmlFor="deliveryAddress">Address</label>
+          <input
+            type="text"
+            id="deliveryAddress"
+            name="deliveryAddress"
+            className="booking-form-group-input"
+            value={formData.deliveryAddress}
+            required
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="booking-form-row">
+        <div className="booking-form-group">
+          <label htmlFor="paymentMethod">Payment Method</label>
+          <input
+            type="text"
+            id="paymentMethod"
+            name="paymentMethod"
+            className="booking-form-group-input"
+            value={formData.paymentMethod}
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div id="booking-request" className="booking-form-group">
+          <label htmlFor="deliverySpecialRequest">Special requests</label>
+          <textarea
+            id="specialRequest"
+            name="deliverySpecialRequest"
+            className="booking-form-group-input delivery-request"
+            value={formData.deliverySpecialRequest}
+            onChange={handleChangeTextarea}
+          ></textarea>
+        </div>
+      </div>
+      <button className="booking-form-btn" type="submit">Order</button>
+    </form>
+  );
+}
+
+export function Header() {
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('userInfo');
+      if (storedUser) {
+          setIsLoggedIn(true);
+           setUserInfo(JSON.parse(storedUser));
+      }
+  }, []);
+
+  return (
+    <div id="header">
+      <Image
+        className="header-logo"
+        src="/logoSuShiX.svg"
+        alt="Next.js logo"
+        width={180}
+        height={40}
+        priority
+      />
+                <Sidebar links={tabs} />
+                {isLoggedIn ? (
+                    <>
+                    {userInfo && (
+                        <div style={{display: "flex", flexDirection: "column", alignItems: "end"}}>
+                            <p style={{margin: 0}}> {userInfo.HOTEN}</p>
+                        </div>
+                    )}
+                   <button className="header-logout" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
+                     Log Out
+                   </button>
+                </>
+                ) : (
+                  <button className="header-btn" onClick={() => router.push("/signin")}>
+                    Sign In
+                  </button>
+                )}
+    </div>
+);
+}
 
 interface DeliveryItem {
     id: string;
@@ -131,37 +316,31 @@ export default function DeliveryPage() {
         setActiveCategory(id as CategoryKeys);
     };
 
+    const handleGoToInfo = () => {   
+      if (calculateTotal() <= 0) {
+        alert("No dish in the order!");
+      }
+      else {
+        const deliveryMenu = document.getElementById("deliveryMenu");
+        if (deliveryMenu) {
+          deliveryMenu.setAttribute("hidden", "");
+          const deliveryInfo = document.getElementById("deliveryInfo");
+          if (deliveryInfo) {
+            deliveryInfo.removeAttribute("hidden");
+          }
+        }
+      }
+    };
+
   return (
     <div>
-        <div id="header" className="header">
-            <Image
-                className="header-logo"
-                src="/logoSuShiX.svg"
-                alt="Next.js logo"
-                width={180}
-                height={40}
-                priority
-            />
-                <Sidebar links={tabs} />
-                {isLoggedIn ? (
-                    <>
-                    {userInfo && (
-                        <div style={{display: "flex", flexDirection: "column", alignItems: "end"}}>
-                            <p style={{margin: 0}}> {userInfo.HOTEN}</p>
-                        </div>
-                    )}
-                   <button className="header-btn" onClick={() => {localStorage.removeItem('userInfo');localStorage.removeItem('isEmployee');localStorage.removeItem('employeeInfo'); router.push("/signin")}}>
-                     Log Out
-                   </button>
-                </>
-                ) : (
-                  <button className="header-btn" onClick={() => router.push("/signin")}>
-                    Sign In
-                  </button>
-                )}
+        <Header/>
+        <div id="deliveryInfo" hidden>
+          <div className="booking-content-title">Delivery Information</div>
+          <Form/>
         </div>
 
-      <main className="flex-1">
+      <main id="deliveryMenu" className="flex-1">
         <div className="home-contentGroup home-contentGroup1">
           <div className="delivery-container">
             <div className="delivery-sidebar">
@@ -232,7 +411,7 @@ export default function DeliveryPage() {
                <div className="delivery-order-total">
                       Total Amount: {calculateTotal().toLocaleString()} VND
                   </div>
-                  <button className="delivery-order-button">Order</button>
+                  <button className="delivery-order-button" onClick={() => handleGoToInfo()}>Order</button>
               </div>
         </div>
       </div>

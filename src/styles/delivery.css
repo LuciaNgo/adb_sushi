@@ -173,3 +173,17 @@
   margin-top: auto;
   align-self: flex-start;
 }
+
+#deliveryInfo {
+  width: 80%;
+  justify-self: center;
+}
+
+#deliveryAddress {
+  width: calc(80vw - 300px - (80vw - 900px)/2);
+  min-width: 600px;
+}
+
+.delivery-request {
+  width: calc(80vw - 300px - (80vw - 900px)/2) !important;
+}

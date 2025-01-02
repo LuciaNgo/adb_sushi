@@ -41,7 +41,6 @@ body {
 
 .header-btn + .header-btn {
   margin-left: 20px;
-  background-color: #EA6D27;
 }
 
 .header-logout {
