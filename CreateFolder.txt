@@ -1,0 +1,32 @@
+@echo off
+setlocal enabledelayedexpansion
+
+set "billDir=D:\PartitionDB\FG_HOADON"
+set "feedbackDir=D:\PartitionDB\FG_DANHGIA"
+
+rem Loop through years
+for %%Y in (2022 2023 2024 2025) do (
+    rem Create FG_HOADON_<Year> folder
+    set "hoadonFolder=!billDir!%%Y"
+    call :CreateFolder "!hoadonFolder!"
+
+    rem Loop through months to create FG_DANHGIA_<Year>_<Month> folders
+    for %%M in (JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC) do (
+        set "danhgiaFolder=!feedbackDir!_%%Y_%%M"
+        call :CreateFolder "!danhgiaFolder!"
+    )
+)
+
+echo All folders created successfully!
+pause
+endlocal
+goto :EOF
+
+:CreateFolder
+set "folderPath=%~1"
+if not exist "%folderPath%" (
+    echo Creating folder: %folderPath%
+    mkdir "%folderPath%"
+) else (
+    echo Folder already exists: %folderPath%
+)
