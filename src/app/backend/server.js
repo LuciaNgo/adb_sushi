@@ -10,46 +10,7 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 
-/**
- * @typedef {Object} MenuItem
- * @property {string} MAMONAN
- * @property {string} TENMONAN
- * @property {number} GIA
- * @property {string} MUCTHUCDON
- * @property {boolean} GIAOHANG
- */
 
-/**
- * @typedef {Object} UserInfo
- * @property {string} MAKHACHHANG
- * @property {string} HOTEN
- * @property {string} SDTKHACHHANG
- * @property {string} MATAIKHOAN
- */
-
-/**
- * @typedef {Object} EmployeeInfo
- * @property {string} MANHANVIEN
- * @property {string} HOTEN
- * @property {string} MABOPHAN
- * @property {string} Role
- */
-
-/**
- * @typedef {Object} SigninRequest
- * @property {string} sdt
- * @property {string} matkhau
- */
-
-/**
- * @typedef {Object} CustomError
- * @property {string} message
- */
-
-/**
- * @param {express.Request} req
- * @param {express.Response} res
- */
 app.get('/', async (req, res) => {
   const pool = await connectToDatabase();
   try {
@@ -63,11 +24,22 @@ app.get('/', async (req, res) => {
   }
 });
 
+app.get('/menu/:maChiNhanh', async (req, res) => {
+    const { maChiNhanh } = req.params;
+    const pool = await connectToDatabase();
+    try {
+        const request = pool.request();
+        request.input('maChiNhanh', sql.Char(8), maChiNhanh);
+        const result = await request.execute('sp_ThucDonChiNhanh'); // Use stored procedure
+        res.json(result.recordset);
+    } catch (error) {
+        /** @type {CustomError} */
+        const customError = error;
+        res.status(500).json({ error: customError.message });
+        console.error(error);
+    }
+});
 
-/**
- * @param {express.Request} req
- * @param {express.Response} res
- */
 app.post('/signin', async (req, res) => {
     /** @type {SigninRequest} */
     const { sdt, matkhau } = req.body;
@@ -123,7 +95,7 @@ app.post('/booking', async (req, res) => {
         request.input('SOLUONGKHACH', sql.Int, SOLUONGKHACH);
         request.input('GHICHU', sql.NVarChar(50), GHICHU);
 
-        const result = await request.execute('sp_ThemPhieuDatBan');
+        const result = await request.execute('sp_ThemPhieuDatBann');
         console.log('Stored procedure result:', result);
         res.json(result.recordset);
     } catch (error) {
@@ -133,6 +105,21 @@ app.post('/booking', async (req, res) => {
         console.error(error);
     }
 });
+
+
+app.get('/menu', async (req, res) => {
+  const pool = await connectToDatabase();
+  try {
+      const result = await pool.request().query('SELECT * FROM MONAN');
+    res.json(result.recordset);
+  } catch (error) {
+    /** @type {CustomError} */
+    const customError = error;
+      res.status(500).json({ error: customError.message });
+      console.error(error);
+  }
+});
+
 
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
