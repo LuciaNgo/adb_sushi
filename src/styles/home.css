@@ -82,4 +82,5 @@ body {
 
 #home-contentGroupContent_3 {
     top: calc(75px + 990px + 2*950px + (950px - 610px)/2);
+    left: 5%;
 }
